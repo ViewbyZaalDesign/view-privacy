@@ -1,0 +1,583 @@
+/* VIEW! Privacy — Consent banner (vanilla CSS, geen framework-afhankelijkheden) */
+
+:root {
+	--vp-bg: #ffffff;
+	--vp-text: #1a1a1a;
+	--vp-accent: #0b6e4f;
+	--vp-font-size: 15px;
+	--vp-radius: 12px;
+}
+
+.vp-banner {
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 999999;
+	background: var(--vp-bg);
+	color: var(--vp-text);
+	font-size: var(--vp-font-size);
+	line-height: 1.65;
+	box-sizing: border-box;
+	max-width: 980px;
+	margin: 20px auto;
+	padding: 34px 36px;
+	border-radius: var(--vp-radius);
+	box-shadow: 4px 5px 18px rgba(0, 0, 0, 0.16);
+}
+
+.vp-banner * {
+	box-sizing: border-box;
+}
+
+.vp-banner--shadow {
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.vp-banner--bottom {
+	bottom: 0;
+}
+
+.vp-banner--top {
+	top: 0;
+}
+
+.vp-banner--center {
+	top: 50%;
+	left: 50%;
+	right: auto;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	width: 92%;
+}
+
+.vp-banner--animate {
+	animation: vp-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes vp-fade-in {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.vp-banner--center.vp-banner--animate {
+	animation: vp-fade-in-center 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes vp-fade-in-center {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -49%);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%);
+	}
+}
+
+.vp-banner__tagline {
+	margin: 0 0 6px;
+	font-size: 0.82em;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	color: var(--vp-accent);
+	opacity: 0.9;
+}
+
+.vp-banner__header {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 16px;
+}
+
+.vp-banner__logo {
+	max-height: 31px;
+	max-width: 132px;
+}
+
+.vp-banner__title {
+	font-weight: 700;
+	font-size: 1.15em;
+	margin: 0;
+}
+
+.vp-banner__text {
+	margin: 0 0 24px;
+	opacity: 0.9;
+}
+
+.vp-banner__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.vp-retention-note {
+	margin: 14px 0 0;
+	font-size: 0.8em;
+	line-height: 1.5;
+	opacity: 0.65;
+}
+
+.vp-footer-line {
+	margin: 10px 0 0;
+	padding-top: 10px;
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
+	font-size: 0.75em;
+	opacity: 0.5;
+}
+
+.vp-btn {
+	font: inherit;
+	font-weight: 600;
+	border-radius: calc(var(--vp-radius) * 0.7);
+	padding: 11.5px 20px;
+	border: 1.5px solid var(--vp-accent);
+	cursor: pointer;
+	transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, filter 0.2s ease;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	box-sizing: border-box;
+	background: var(--vp-bg);
+	color: var(--vp-text);
+	white-space: nowrap;
+}
+
+.vp-btn:focus-visible {
+	outline: 2px solid var(--vp-accent);
+	outline-offset: 2px;
+}
+
+/* Vaste visuele hiërarchie — geen aparte kleur per knop:
+   "Alles accepteren" is primair (gevuld met de accentkleur),
+   "Alles weigeren", "Privacy-instellingen" en "Privacybeleid" zijn
+   secundair (omlijnd in de accentkleur). */
+.vp-btn--primary {
+	background: var(--vp-accent);
+	border-color: var(--vp-accent);
+	color: #ffffff;
+}
+
+.vp-btn--primary:hover {
+	filter: brightness(0.92);
+}
+
+.vp-btn--secondary,
+.vp-btn--text {
+	background: var(--vp-bg);
+	border-color: var(--vp-accent);
+	color: var(--vp-text);
+}
+
+/* Expliciete link-states overschrijven: de browser past anders een hogere-
+   specificiteit UA-stijl toe op <a>, waardoor de kleur op hover/visited
+   terugvalt naar de standaard linkkleur in plaats van de ingestelde
+   tekstkleur te volgen ("Privacybeleid" is een <a>, geen <button>). */
+.vp-btn--secondary:link,
+.vp-btn--secondary:visited,
+.vp-btn--text:link,
+.vp-btn--text:visited {
+	color: var(--vp-text);
+	background: var(--vp-bg);
+}
+
+.vp-btn--secondary:hover,
+.vp-btn--secondary:active,
+.vp-btn--text:hover,
+.vp-btn--text:active {
+	background: var(--vp-accent);
+	color: #ffffff;
+}
+
+/* --- Voorkeurencentrum (modaal) --- */
+
+.vp-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.45);
+	z-index: 999998;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16px;
+}
+
+.vp-modal {
+	background: var(--vp-bg);
+	color: var(--vp-text);
+	font-size: var(--vp-font-size);
+	border-radius: var(--vp-radius);
+	max-width: 900px;
+	width: 100%;
+	max-height: 86vh;
+	overflow-y: auto;
+	padding: 32px;
+	box-shadow: 4px 5px 18px rgba(0, 0, 0, 0.16);
+}
+
+.vp-modal__title {
+	margin: 0 0 16px;
+	font-size: 1.25em;
+	font-weight: 700;
+}
+
+.vp-category {
+	background: #f7f8f7;
+	border-radius: calc(var(--vp-radius) * 0.7);
+	padding: 16px 18px;
+	margin-bottom: 10px;
+}
+
+.vp-category__row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.vp-category__expand {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	background: none;
+	border: none;
+	padding: 0;
+	margin: 0;
+	font: inherit;
+	color: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.vp-category__expand:focus-visible {
+	outline: 2px solid var(--vp-accent);
+	outline-offset: 3px;
+	border-radius: 4px;
+}
+
+.vp-category__label-group {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+}
+
+.vp-category__icon {
+	flex-shrink: 0;
+	width: 22px;
+	height: 22px;
+	color: var(--vp-accent);
+}
+
+.vp-category__icon svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.vp-category__chevron {
+	flex-shrink: 0;
+	width: 18px;
+	height: 18px;
+	opacity: 0.55;
+	transition: transform 0.2s ease;
+}
+
+.vp-category__chevron svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.vp-category.is-open .vp-category__chevron {
+	transform: rotate(180deg);
+}
+
+.vp-category__label {
+	font-weight: 600;
+}
+
+.vp-category__desc {
+	margin: 12px 0 0;
+	font-size: 0.92em;
+	opacity: 0.8;
+	line-height: 1.5;
+}
+
+.vp-category__desc[hidden] {
+	display: none;
+}
+
+/* Toggle switch */
+.vp-switch {
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 26px;
+	flex-shrink: 0;
+}
+
+.vp-switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.vp-switch__track {
+	position: absolute;
+	inset: 0;
+	background: #d5d7d5;
+	border-radius: 999px;
+	cursor: pointer;
+	transition: background 0.2s ease;
+}
+
+.vp-switch__track::before {
+	content: "";
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	left: 3px;
+	top: 3px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+	transition: transform 0.2s ease;
+}
+
+.vp-switch input:checked + .vp-switch__track {
+	background: var(--vp-accent);
+}
+
+.vp-switch input:checked + .vp-switch__track::before {
+	transform: translateX(18px);
+}
+
+.vp-switch input:focus-visible + .vp-switch__track {
+	outline: 2px solid var(--vp-accent);
+	outline-offset: 2px;
+}
+
+.vp-switch input:disabled + .vp-switch__track {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.vp-modal__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 24px;
+}
+
+/* --- Placeholder voor geblokkeerde embeds (§10) --- */
+
+.view-privacy-embed-placeholder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	text-align: center;
+	background: var(--vp-bg);
+	border: 1px solid #e5e7e5;
+	border-radius: var(--vp-radius);
+	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+	padding: 32px 24px;
+	min-height: 200px;
+	color: var(--vp-text);
+	font-size: var(--vp-font-size);
+	box-sizing: border-box;
+	opacity: 1;
+	transition: opacity 0.2s ease;
+}
+
+.view-privacy-embed-placeholder--leaving {
+	opacity: 0;
+}
+
+.view-privacy-embed-fade-in {
+	opacity: 0;
+	transition: opacity 0.35s ease;
+}
+
+.view-privacy-embed-placeholder__icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.view-privacy-embed-placeholder__icon svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.view-privacy-embed-placeholder__title {
+	margin: 4px 0 0;
+	font-weight: 700;
+}
+
+.view-privacy-embed-placeholder__text {
+	max-width: 380px;
+	margin: 0;
+	opacity: 0.8;
+	font-size: 0.95em;
+	line-height: 1.5;
+}
+
+.view-privacy-embed-placeholder__text--intro {
+	margin-bottom: 2px;
+	font-weight: 600;
+	opacity: 0.9;
+}
+
+.view-privacy-embed-placeholder__actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 6px;
+}
+
+@media (max-width: 600px) {
+	.vp-banner {
+		margin: 0;
+		border-radius: 0;
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.vp-banner--center {
+		border-radius: var(--vp-radius);
+		width: 92%;
+	}
+
+	.vp-btn {
+		white-space: normal;
+	}
+
+	.vp-banner__actions,
+	.vp-modal__actions {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.vp-banner__actions .vp-btn,
+	.vp-modal__actions .vp-btn {
+		width: 100%;
+	}
+}
+
+/* --- Herstelknop (stroopwafel) om voorkeuren opnieuw te openen --- */
+
+.vp-reopen-btn {
+	position: fixed;
+	left: 16px;
+	bottom: 16px;
+	z-index: 999997;
+	height: 40px;
+	padding: 0 14px 0 0;
+	margin: 0;
+	border: none;
+	border-radius: 999px;
+	background: #ffffff;
+	box-shadow: 3px 4px 14px rgba(0, 0, 0, 0.16);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	appearance: none;
+	-webkit-appearance: none;
+	-webkit-tap-highlight-color: transparent;
+	opacity: 0.92;
+	transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.vp-reopen-btn:hover,
+.vp-reopen-btn:focus,
+.vp-reopen-btn:active {
+	opacity: 1;
+	background: #1d1d1b;
+	box-shadow: 4px 5px 18px rgba(0, 0, 0, 0.3);
+}
+
+.vp-reopen-btn:hover .vp-reopen-btn__label,
+.vp-reopen-btn:focus .vp-reopen-btn__label,
+.vp-reopen-btn:active .vp-reopen-btn__label {
+	color: #ffffff;
+}
+
+.vp-reopen-btn:focus-visible {
+	outline: 2px solid var(--vp-accent, #0b6e4f);
+	outline-offset: 3px;
+}
+
+.vp-reopen-btn:hover,
+.vp-reopen-btn.is-pulsing {
+	animation: vp-pulse 0.5s ease-in-out;
+}
+
+@keyframes vp-pulse {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.06);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+.vp-reopen-btn img {
+	width: 40px;
+	height: 40px;
+	flex-shrink: 0;
+	object-fit: contain;
+	display: block;
+	border-radius: 50%;
+}
+
+.vp-reopen-btn__label {
+	font-size: 13px;
+	font-weight: 600;
+	color: #261b62;
+	white-space: nowrap;
+	line-height: 1;
+	transition: color 0.15s ease;
+}
+
+@media (max-width: 600px) {
+	.vp-reopen-btn {
+		height: 34px;
+		left: 12px;
+		bottom: 12px;
+		padding-right: 12px;
+	}
+
+	.vp-reopen-btn img {
+		width: 34px;
+		height: 34px;
+	}
+
+	.vp-reopen-btn__label {
+		font-size: 12px;
+	}
+}

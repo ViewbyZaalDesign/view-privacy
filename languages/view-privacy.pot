@@ -1,0 +1,770 @@
+# Copyright (C) 2026 VIEW!
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: VIEW! Privacy 3.1.6\n"
+"Report-Msgid-Bugs-To: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-08-11T11:03:15+00:00\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: view-privacy\n"
+
+#: includes/class-view-privacy-consent.php:263
+#: includes/class-view-privacy-consent.php:430
+#. translators: %s: naam van de dienst, bv. Google Maps.
+msgid "%s laden"
+msgstr ""
+
+#: admin/views/logs.php:94
+msgid "&laquo; Vorige"
+msgstr ""
+
+#: admin/views/settings.php:103
+msgid "Accent (knoppen)"
+msgstr ""
+
+#: admin/views/settings.php:101
+msgid "Achtergrond"
+msgstr ""
+
+#: admin/views/services.php:30
+msgid "Actief"
+msgstr ""
+
+#: admin/views/dashboard.php:278
+msgid "Actieve diensten"
+msgstr ""
+
+#: admin/views/settings.php:56
+#: admin/views/dashboard.php:271
+msgid "Alleen functionele cookies"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:254
+#: includes/class-view-privacy-consent.php:421
+msgid "Alles accepteren"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:255
+#: includes/class-view-privacy-consent.php:422
+msgid "Alles weigeren"
+msgstr ""
+
+#: admin/views/dashboard.php:224
+msgid "Analytics"
+msgstr ""
+
+#: admin/views/settings.php:53
+msgid "Banner"
+msgstr ""
+
+#: admin/views/dashboard.php:306
+msgid "Banner &amp; instellingen"
+msgstr ""
+
+#: admin/views/dashboard.php:178
+msgid "Banner actief"
+msgstr ""
+
+#: admin/views/dashboard.php:268
+msgid "Bannermodus"
+msgstr ""
+
+#: admin/views/settings.php:85
+msgid "Bannertekst"
+msgstr ""
+
+#: admin/views/services.php:19
+msgid "Beheer welke diensten automatisch worden geblokkeerd totdat toestemming is gegeven."
+msgstr ""
+
+#: admin/views/settings.php:156
+msgid "Beschrijving"
+msgstr ""
+
+#: includes/class-view-privacy-import-export.php:95
+msgid "Bestand bevat geen geldige VIEW! Privacy-instellingen."
+msgstr ""
+
+#: includes/class-view-privacy-import-export.php:83
+msgid "Bestand is te groot."
+msgstr ""
+
+#: includes/class-view-privacy-import-export.php:89
+msgid "Bestand kon niet worden gelezen."
+msgstr ""
+
+#: admin/views/settings.php:111
+msgid "Border-radius (px)"
+msgstr ""
+
+#: admin/views/settings.php:93
+msgid "Bovenaan"
+msgstr ""
+
+#: admin/views/settings.php:154
+#: admin/views/services.php:32
+msgid "Categorie"
+msgstr ""
+
+#: admin/views/logs.php:52
+msgid "Categorieën"
+msgstr ""
+
+#: admin/views/dashboard.php:282
+msgid "Consentkeuzes"
+msgstr ""
+
+#: admin/views/dashboard.php:286
+#: admin/views/logs.php:51
+msgid "Consentversie"
+msgstr ""
+
+#: admin/views/services.php:43
+msgid "Container: laadt zodra één van de niet-noodzakelijke categorieën is toegestaan"
+msgstr ""
+
+#: admin/views/settings.php:149
+msgid "Cookiecategorieën"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:260
+#: includes/class-view-privacy-consent.php:427
+msgid "Cookies aanpassen"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:261
+#: includes/class-view-privacy-consent.php:428
+msgid "Cookies accepteren"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:265
+#: includes/class-view-privacy-consent.php:432
+msgid "Cookievoorkeuren aanpassen"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:277
+#: includes/class-view-privacy-consent.php:416
+#. translators: 1: jaartal, 2: versienummer — blijven als placeholders staan bij het vertalen.
+msgid "Copyright %1$d View! by Zaal Design. — v%2$s"
+msgstr ""
+
+#: admin/views/dashboard.php:317
+#. translators: %d: huidig jaartal, wordt automatisch bijgewerkt.
+msgid "Copyright %d View! by Zaal Design."
+msgstr ""
+
+#: admin/class-view-privacy-admin.php:68
+#: admin/class-view-privacy-admin.php:69
+msgid "Dashboard"
+msgstr ""
+
+#: admin/views/logs.php:50
+msgid "Datum/tijd"
+msgstr ""
+
+#: admin/views/settings.php:150
+msgid "De categorie \"Noodzakelijk\" is altijd actief en kan niet worden uitgeschakeld door bezoekers."
+msgstr ""
+
+#: includes/class-view-privacy-core.php:194
+msgid "Deze cookies helpen ons te begrijpen hoe bezoekers de website gebruiken."
+msgstr ""
+
+#: includes/class-view-privacy-core.php:188
+msgid "Deze cookies horen bij ingesloten content van externe partijen, zoals video's en kaarten."
+msgstr ""
+
+#: includes/class-view-privacy-core.php:200
+msgid "Deze cookies worden gebruikt om advertenties relevanter te maken voor u."
+msgstr ""
+
+#: includes/class-view-privacy-core.php:182
+msgid "Deze cookies zijn essentieel voor het functioneren van de website en kunnen niet worden uitgeschakeld."
+msgstr ""
+
+#: includes/class-view-privacy-core.php:176
+msgid "Deze site plaatst alleen functionele cookies waarvoor geen toestemming nodig is."
+msgstr ""
+
+#: admin/views/settings.php:60
+msgid "Deze site plaatst uitsluitend noodzakelijke/functionele cookies; toon een eenvoudige melding zonder toestemmingsvraag in plaats van de volledige banner."
+msgstr ""
+
+#: admin/views/services.php:31
+msgid "Dienst"
+msgstr ""
+
+#: admin/views/dashboard.php:307
+#: admin/class-view-privacy-admin.php:86
+#: admin/class-view-privacy-admin.php:87
+msgid "Diensten"
+msgstr ""
+
+#: admin/views/dashboard.php:186
+msgid "Diensten beveiligd"
+msgstr ""
+
+#: admin/views/services.php:71
+msgid "Diensten opslaan"
+msgstr ""
+
+#: admin/views/import-export.php:20
+msgid "Download alle huidige instellingen (banner, categorieën, diensten) als JSON-bestand."
+msgstr ""
+
+#: admin/views/settings.php:143
+msgid "Eigen afbeelding uploaden"
+msgstr ""
+
+#: admin/views/services.php:60
+msgid "Eigen dienst toevoegen"
+msgstr ""
+
+#: admin/views/services.php:77
+msgid "Eigen diensten kunnen ook programmatisch worden toegevoegd via het filter view_privacy_services, en consent kan serverside gecontroleerd worden met:"
+msgstr ""
+
+#: admin/class-view-privacy-admin.php:239
+msgid "Er is geen privacybeleidpagina ingesteld. Daarom wordt de cookiebanner niet weergegeven. Ga naar VIEW! Privacy → Instellingen en wijs eerst een privacybeleidpagina toe."
+msgstr ""
+
+#: admin/views/import-export.php:19
+msgid "Exporteren"
+msgstr ""
+
+#: includes/class-view-privacy-core.php:187
+msgid "Externe media"
+msgstr ""
+
+#: includes/class-view-privacy-core.php:177
+msgid "Ga verder naar de site"
+msgstr ""
+
+#: admin/views/settings.php:62
+msgid "Gebruik dit alleen als u zeker weet dat er geen statistiek-, voorkeur- of marketingcookies (zoals Google Analytics, advertentiepixels of embeds die cookies plaatsen) actief zijn. Controleer dit bij twijfel via het tabblad Diensten."
+msgstr ""
+
+#: admin/views/settings.php:140
+msgid "Gebruiken"
+msgstr ""
+
+#: admin/views/settings.php:94
+msgid "Gecentreerd (modaal)"
+msgstr ""
+
+#: admin/views/dashboard.php:227
+#: admin/views/dashboard.php:235
+#: admin/views/dashboard.php:243
+msgid "Gedetecteerd"
+msgstr ""
+
+#: includes/class-view-privacy-import-export.php:79
+msgid "Geen geldig bestand ontvangen."
+msgstr ""
+
+#: admin/views/dashboard.php:208
+msgid "Geen privacybeleidpagina gekoppeld: de cookiebanner wordt niet getoond."
+msgstr ""
+
+#: admin/views/dashboard.php:219
+msgid "Gekoppeld"
+msgstr ""
+
+#: admin/views/dashboard.php:240
+msgid "Google Maps"
+msgstr ""
+
+#: admin/views/services.php:33
+msgid "Herkenningspatronen"
+msgstr ""
+
+#: admin/views/settings.php:123
+msgid "Herstelknop-afbeelding"
+msgstr ""
+
+#: admin/views/dashboard.php:309
+#: admin/class-view-privacy-admin.php:104
+#: admin/class-view-privacy-admin.php:105
+msgid "Import / Export"
+msgstr ""
+
+#: admin/class-view-privacy-admin.php:214
+msgid "Import mislukt."
+msgstr ""
+
+#: admin/views/import-export.php:29
+msgid "Importeren"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:259
+#: includes/class-view-privacy-consent.php:426
+msgid "Inhoud geblokkeerd"
+msgstr ""
+
+#: admin/class-view-privacy-admin.php:77
+#: admin/class-view-privacy-admin.php:78
+#: view-privacy.php:125
+msgid "Instellingen"
+msgstr ""
+
+#: admin/views/import-export.php:24
+msgid "Instellingen exporteren"
+msgstr ""
+
+#: admin/views/import-export.php:36
+msgid "Instellingen importeren"
+msgstr ""
+
+#: admin/class-view-privacy-admin.php:197
+msgid "Instellingen opgeslagen."
+msgstr ""
+
+#: admin/views/settings.php:190
+msgid "Instellingen opslaan"
+msgstr ""
+
+#: admin/class-view-privacy-admin.php:207
+msgid "Instellingen succesvol geïmporteerd."
+msgstr ""
+
+#: admin/class-view-privacy-admin.php:202
+msgid "Instellingen zijn teruggezet naar de standaardwaarden."
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:272
+#: includes/class-view-privacy-consent.php:403
+msgid "Kaart"
+msgstr ""
+
+#: admin/views/settings.php:139
+msgid "Kies een afbeelding voor de herstelknop"
+msgstr ""
+
+#: admin/views/settings.php:99
+msgid "Kleuren"
+msgstr ""
+
+#: admin/views/settings.php:70
+msgid "Knoptekst"
+msgstr ""
+
+#: admin/views/settings.php:77
+msgid "Korte, vriendelijke regel boven de titel. Laat leeg om te verbergen."
+msgstr ""
+
+#: admin/views/dashboard.php:190
+msgid "Laatste controle:"
+msgstr ""
+
+#: admin/views/dashboard.php:248
+msgid "Laatste scan"
+msgstr ""
+
+#: admin/views/settings.php:107
+msgid "Lettergrootte (px)"
+msgstr ""
+
+#: admin/views/settings.php:119
+msgid "Lettertype van actief thema overnemen"
+msgstr ""
+
+#: admin/views/dashboard.php:308
+#: admin/class-view-privacy-admin.php:95
+#: admin/class-view-privacy-admin.php:96
+msgid "Logboek"
+msgstr ""
+
+#: admin/views/settings.php:178
+msgid "Logging"
+msgstr ""
+
+#: admin/views/logs.php:40
+msgid "Logging staat momenteel uit. Ga naar Instellingen om dit in te schakelen."
+msgstr ""
+
+#: admin/views/settings.php:184
+msgid "Logregels worden automatisch na 365 dagen verwijderd."
+msgstr ""
+
+#: admin/views/dashboard.php:119
+msgid "Logtabel aanwezig"
+msgstr ""
+
+#: includes/class-view-privacy-core.php:199
+msgid "Marketing"
+msgstr ""
+
+#: admin/views/settings.php:155
+msgid "Naam"
+msgstr ""
+
+#: admin/views/dashboard.php:227
+#: admin/views/dashboard.php:235
+#: admin/views/dashboard.php:243
+msgid "Niet actief"
+msgstr ""
+
+#: admin/views/logs.php:45
+msgid "Nog geen consentkeuzes geregistreerd."
+msgstr ""
+
+#: admin/views/dashboard.php:253
+msgid "Nog geen scan"
+msgstr ""
+
+#: admin/views/dashboard.php:227
+#: admin/views/dashboard.php:235
+#: admin/views/dashboard.php:243
+msgid "Nog niet gezien"
+msgstr ""
+
+#: includes/class-view-privacy-core.php:181
+msgid "Noodzakelijk"
+msgstr ""
+
+#: admin/views/dashboard.php:209
+msgid "Nu instellen"
+msgstr ""
+
+#: admin/views/settings.php:92
+msgid "Onderaan"
+msgstr ""
+
+#: includes/class-view-privacy-rest.php:83
+msgid "Ongeldig verzoek."
+msgstr ""
+
+#: includes/class-view-privacy-rest.php:93
+msgid "Ongeldige categorieën."
+msgstr ""
+
+#: admin/views/dashboard.php:219
+msgid "Ontbreekt"
+msgstr ""
+
+#: includes/class-view-privacy-import-export.php:50
+msgid "Onvoldoende rechten."
+msgstr ""
+
+#: admin/class-view-privacy-admin.php:241
+msgid "Open VIEW! Privacy → Instellingen"
+msgstr ""
+
+#: admin/views/settings.php:115
+msgid "Overig"
+msgstr ""
+
+#: admin/views/dashboard.php:109
+msgid "PHP-versie"
+msgstr ""
+
+#: admin/views/dashboard.php:290
+msgid "Pluginversie"
+msgstr ""
+
+#: admin/views/settings.php:46
+msgid "Polylang gedetecteerd: kies hier de brontaal-pagina. VIEW! Privacy zoekt automatisch de Polylang-vertaling voor de taal die de bezoeker bekijkt; ontbreekt die vertaling, dan wordt teruggevallen op deze bronpagina en verschijnt hierboven op het dashboard een waarschuwing."
+msgstr ""
+
+#: admin/views/settings.php:89
+msgid "Positie"
+msgstr ""
+
+#: admin/views/dashboard.php:146
+msgid "Privacy-first cookieconsent, zonder externe cloudservices."
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:266
+#: includes/class-view-privacy-consent.php:433
+msgid "Privacy-instellingen"
+msgstr ""
+
+#: admin/views/settings.php:25
+#: admin/views/dashboard.php:216
+#: includes/class-view-privacy-consent.php:264
+#: includes/class-view-privacy-consent.php:431
+msgid "Privacybeleid"
+msgstr ""
+
+#: admin/views/dashboard.php:182
+msgid "Privacybeleid gekoppeld"
+msgstr ""
+
+#: admin/views/settings.php:28
+msgid "Privacybeleidpagina"
+msgstr ""
+
+#: admin/views/dashboard.php:153
+msgid "Privacybeleidpagina niet voor alle talen vertaald (Polylang)"
+msgstr ""
+
+#: admin/views/dashboard.php:128
+msgid "REST API bereikbaar"
+msgstr ""
+
+#: admin/views/logs.php:53
+msgid "Referentie"
+msgstr ""
+
+#: admin/views/settings.php:183
+msgid "Registreer datum/tijd en consentversie bij elke keuze (§13)"
+msgstr ""
+
+#: admin/views/settings.php:117
+msgid "Schaduw"
+msgstr ""
+
+#: admin/views/services.php:68
+msgid "Sla het formulier op en de nieuwe dienst verschijnt hierboven om verder te configureren."
+msgstr ""
+
+#: admin/views/services.php:64
+msgid "Sleutel (uniek, kleine letters, geen spaties)"
+msgstr ""
+
+#: admin/views/settings.php:157
+msgid "Standaard aan"
+msgstr ""
+
+#: admin/views/settings.php:125
+msgid "Standaard verschijnt de stroopwafel-foto naast de herstelknop. U kunt hier optioneel een eigen afbeelding uploaden. Gebruik een geschikte, herkenbare afbeelding (bij voorkeur vierkant); ter bescherming van de laadtijd wordt automatisch de kleine, door WordPress gegenereerde miniatuurversie gebruikt, ongeacht de grootte van het geüploade bestand."
+msgstr ""
+
+#: admin/views/settings.php:131
+#: admin/views/settings.php:142
+msgid "Standaardafbeelding"
+msgstr ""
+
+#: admin/views/settings.php:199
+msgid "Standaardwaarden herstellen"
+msgstr ""
+
+#: includes/class-view-privacy-core.php:193
+msgid "Statistieken"
+msgstr ""
+
+#: admin/views/settings.php:118
+msgid "Subtiele fade-in animatie"
+msgstr ""
+
+#: admin/views/settings.php:74
+msgid "Tagline (boven de titel)"
+msgstr ""
+
+#: admin/views/settings.php:102
+msgid "Tekst"
+msgstr ""
+
+#: admin/views/settings.php:66
+msgid "Tekst bij \"Alleen functionele cookies\""
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:258
+#: includes/class-view-privacy-consent.php:425
+msgid "Terug"
+msgstr ""
+
+#: admin/views/settings.php:144
+msgid "Terug naar standaard (stroopwafel)"
+msgstr ""
+
+#: admin/views/settings.php:197
+msgid "Terugzetten"
+msgstr ""
+
+#: admin/views/settings.php:81
+msgid "Titel"
+msgstr ""
+
+#: admin/views/settings.php:181
+msgid "Toestemming registreren"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:269
+#: includes/class-view-privacy-consent.php:436
+#. translators: %s: type inhoud, bv. video of kaart.
+msgid "U bepaalt zelf wanneer deze %s wordt geladen."
+msgstr ""
+
+#: admin/views/import-export.php:30
+msgid "Upload een eerder geëxporteerd VIEW! Privacy JSON-bestand. Dit overschrijft de huidige instellingen."
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:270
+#: includes/class-view-privacy-consent.php:437
+msgid "Uw keuze wordt door VIEW! Privacy 365 dagen bewaard. U kunt dit op elk moment opnieuw instellen via de privacy-instellingen."
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:267
+#: includes/class-view-privacy-consent.php:434
+msgid "Uw privacy staat voorop."
+msgstr ""
+
+#: includes/class-view-privacy-core.php:161
+msgid "Uw privacy. Uw keuze."
+msgstr ""
+
+#: admin/class-view-privacy-admin.php:57
+#: admin/class-view-privacy-admin.php:58
+msgid "VIEW! Privacy"
+msgstr ""
+
+#: view-privacy.php:59
+msgid "VIEW! Privacy vereist PHP 8.1 of hoger. De plugin is niet geactiveerd."
+msgstr ""
+
+#: admin/views/dashboard.php:255
+msgid "Vandaag"
+msgstr ""
+
+#: admin/views/settings.php:42
+msgid "Verplicht: zonder een gekozen privacybeleidpagina blijft de cookiebanner uitgeschakeld. Dit is de eigen, door VIEW! Privacy beheerde instelling — onafhankelijk van WordPress → Instellingen → Privacy."
+msgstr ""
+
+#: admin/views/dashboard.php:327
+#. translators: %s: versienummer van de plugin, bv. 2.0.0.
+msgid "Versie %s — Stable"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:271
+#: includes/class-view-privacy-consent.php:402
+msgid "Video"
+msgstr ""
+
+#: admin/views/partials/header.php:16
+msgid "View!"
+msgstr ""
+
+#: admin/views/services.php:61
+msgid "Voeg een dienst toe die niet in de standaardlijst staat. Eén herkenningspatroon per regel (bv. een domeinnaam die in de scripturl voorkomt)."
+msgstr ""
+
+#: admin/views/logs.php:95
+msgid "Volgende &raquo;"
+msgstr ""
+
+#: admin/views/dashboard.php:273
+msgid "Volledig"
+msgstr ""
+
+#: admin/views/dashboard.php:165
+#. translators: %s: kommagescheiden lijst van taalnamen.
+msgid "Voor de volgende taal/talen ontbreekt een vertaling van de ingestelde privacybeleidpagina: %s. De cookiebanner blijft zichtbaar en verwijst voorlopig naar de oorspronkelijke privacybeleidpagina. Maak de ontbrekende vertaling(en) aan via Polylang voor een correcte koppeling per taal."
+msgstr ""
+
+#: admin/views/services.php:76
+msgid "Voor ontwikkelaars"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:256
+#: includes/class-view-privacy-consent.php:423
+msgid "Voorkeuren"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:257
+#: includes/class-view-privacy-consent.php:424
+msgid "Voorkeuren opslaan"
+msgstr ""
+
+#: admin/views/settings.php:194
+msgid "Weet u zeker dat u alle instellingen wilt terugzetten naar de standaardwaarden?"
+msgstr ""
+
+#: includes/class-view-privacy-core.php:163
+msgid "Wij gebruiken cookies om onze website te laten functioneren en, met uw toestemming, om statistieken te verzamelen en content te personaliseren. U kunt uw voorkeuren op elk moment aanpassen."
+msgstr ""
+
+#: includes/class-view-privacy-core.php:162
+msgid "Wij respecteren uw privacy"
+msgstr ""
+
+#: admin/views/dashboard.php:114
+msgid "WordPress-versie"
+msgstr ""
+
+#: admin/views/dashboard.php:232
+msgid "YouTube"
+msgstr ""
+
+#: admin/views/settings.php:198
+msgid "Zet alle VIEW! Privacy-instellingen terug naar de fabrieksstandaard."
+msgstr ""
+
+#: admin/views/dashboard.php:299
+msgid "controleer"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:275
+#: includes/class-view-privacy-consent.php:408
+msgid "inhoud"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:274
+#: includes/class-view-privacy-consent.php:407
+msgid "kaart"
+msgstr ""
+
+#: admin/views/dashboard.php:193
+msgid "nog geen scan"
+msgstr ""
+
+#: admin/views/dashboard.php:186
+msgid "nog niet alles bevestigd"
+msgstr ""
+
+#: admin/views/dashboard.php:182
+msgid "ontbreekt"
+msgstr ""
+
+#: admin/views/dashboard.php:178
+msgid "uitgeschakeld"
+msgstr ""
+
+#: admin/views/dashboard.php:195
+msgid "vandaag"
+msgstr ""
+
+#: admin/views/settings.php:163
+msgid "vergrendeld"
+msgstr ""
+
+#: includes/class-view-privacy-consent.php:273
+#: includes/class-view-privacy-consent.php:406
+msgid "video"
+msgstr ""
+
+#: admin/views/dashboard.php:145
+msgid "— Dashboard"
+msgstr ""
+
+#: admin/views/services.php:18
+msgid "— Diensten"
+msgstr ""
+
+#: admin/views/import-export.php:14
+msgid "— Import / Export"
+msgstr ""
+
+#: admin/views/settings.php:17
+msgid "— Instellingen"
+msgstr ""
+
+#: admin/views/settings.php:36
+msgid "— Kies een pagina —"
+msgstr ""
+
+#: admin/views/logs.php:35
+msgid "— Logboek"
+msgstr ""
+
+#: admin/views/dashboard.php:198
+#: admin/views/dashboard.php:258
+#. translators: %d: aantal dagen geleden.
+msgid "%d dag geleden"
+msgid_plural "%d dagen geleden"
+msgstr[0] ""
+msgstr[1] ""
+
