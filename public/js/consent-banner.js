@@ -428,6 +428,9 @@
 		var b = config.banner;
 		var el = document.createElement( 'div' );
 		el.className = 'vp-banner vp-banner--' + b.position;
+		if ( b.tagline ) {
+			el.className += ' vp-banner--has-tagline';
+		}
 		if ( b.shadow ) {
 			el.className += ' vp-banner--shadow';
 		}
@@ -465,6 +468,13 @@
 		title.textContent = b.title;
 		header.appendChild( title );
 
+		var heading = null;
+		if ( b.heading ) {
+			heading = document.createElement( 'p' );
+			heading.className = 'vp-banner__heading';
+			heading.textContent = b.heading;
+		}
+
 		var text = document.createElement( 'p' );
 		text.className = 'vp-banner__text';
 		text.textContent = b.text;
@@ -492,6 +502,9 @@
 		}
 
 		el.appendChild( header );
+		if ( heading ) {
+			el.appendChild( heading );
+		}
 		el.appendChild( text );
 		el.appendChild( actions );
 
@@ -526,77 +539,18 @@
 	 * cookies plaatsen: geen categorieën, geen toestemmingsvraag, enkel een
 	 * melding met één sluitknop (en optioneel de privacybeleid-link).
 	 */
-	function createSimpleBanner() {
-		var b = config.banner;
-		var el = document.createElement( 'div' );
-		el.className = 'vp-banner vp-banner--' + b.position;
-		if ( b.shadow ) {
-			el.className += ' vp-banner--shadow';
-		}
-		if ( b.animation ) {
-			el.className += ' vp-banner--animate';
-		}
-		el.setAttribute( 'role', 'dialog' );
-		el.setAttribute( 'aria-modal', 'false' );
-		el.setAttribute( 'aria-label', b.title );
-
-		applyStyleVars( el );
-
-		var header = document.createElement( 'div' );
-		header.className = 'vp-banner__header';
-
-		if ( b.logo ) {
-			var logo = document.createElement( 'img' );
-			logo.className = 'vp-banner__logo';
-			logo.src = b.logo;
-			logo.alt = '';
-			header.appendChild( logo );
-		}
-
-		var title = document.createElement( 'p' );
-		title.className = 'vp-banner__title';
-		title.textContent = b.title;
-		header.appendChild( title );
-
-		var text = document.createElement( 'p' );
-		text.className = 'vp-banner__text';
-		text.textContent = b.simple_text;
-
-		var actions = document.createElement( 'div' );
-		actions.className = 'vp-banner__actions';
-
-		var closeBtn = makeButton( b.simple_button_label, 'vp-btn--primary', function () {
-			finalizeSimpleAck();
-		} );
-		actions.appendChild( closeBtn );
-
-		var privacyLink = makePrivacyLink();
-		if ( privacyLink ) {
-			actions.appendChild( privacyLink );
-		}
-
-		el.appendChild( header );
-		el.appendChild( text );
-		el.appendChild( actions );
-
-		var simpleRetentionNote = makeRetentionNote();
-		if ( simpleRetentionNote ) {
-			el.appendChild( simpleRetentionNote );
-		}
-
-		var simpleFooterLine = makeFooterLine();
-		if ( simpleFooterLine ) {
-			el.appendChild( simpleFooterLine );
-		}
-
-		return el;
-	}
 
 	function applyStyleVars( el ) {
 		var b = config.banner;
 		el.style.setProperty( '--vp-bg', b.color_bg );
 		el.style.setProperty( '--vp-text', b.color_text );
 		el.style.setProperty( '--vp-accent', b.color_accent );
+		el.style.setProperty( '--vp-btn-primary-text', b.button_primary_text || '#ffffff' );
+		el.style.setProperty( '--vp-btn-primary-bg', b.button_primary_bg || b.color_accent );
+		el.style.setProperty( '--vp-btn-primary-border', b.button_primary_border || b.color_accent );
+		el.style.setProperty( '--vp-btn-secondary-text', b.button_secondary_text || b.color_text );
+		el.style.setProperty( '--vp-btn-secondary-bg', b.button_secondary_bg || b.color_bg );
+		el.style.setProperty( '--vp-btn-secondary-border', b.button_secondary_border || b.color_accent );
 		el.style.setProperty( '--vp-font-size', b.font_size + 'px' );
 		el.style.setProperty( '--vp-radius', b.border_radius + 'px' );
 		if ( b.use_theme_font ) {
@@ -617,7 +571,7 @@
 		if ( bannerEl ) {
 			return;
 		}
-		bannerEl = config.banner.simple_mode ? createSimpleBanner() : createBanner();
+		bannerEl = createBanner();
 		document.body.appendChild( bannerEl );
 	}
 
@@ -941,14 +895,27 @@
 		if ( consent ) {
 			applyConsent( consent.categories );
 			renderAllPlaceholders( consent.categories );
-			if ( ! config.banner.simple_mode ) {
-				showReopenButton();
-			}
+			showReopenButton();
 			return;
 		}
 
 		renderAllPlaceholders( onlyNecessary() );
-		showBanner();
+
+		// Op mobiele schermen krijgt de bezoeker eerst kort de tijd om de
+		// taalkeuze in het menu te maken. De banner wordt alleen vertraagd
+		// qua zichtbaarheid; blokkering van niet-noodzakelijke inhoud blijft
+		// vanaf het eerste moment actief. Desktop blijft ongewijzigd.
+		var isMobile = window.matchMedia && window.matchMedia( '(max-width: 767px)' ).matches;
+		if ( isMobile ) {
+			window.setTimeout( function () {
+				// Als er intussen toch consent is gegeven, toon de banner niet meer.
+				if ( ! readConsent() ) {
+					showBanner();
+				}
+			}, 5000 );
+		} else {
+			showBanner();
+		}
 	}
 
 	// Maak "Cookies aanpassen" ook programmatisch/handmatig bruikbaar,

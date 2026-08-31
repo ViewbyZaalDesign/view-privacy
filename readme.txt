@@ -4,7 +4,7 @@ Tags: cookies, gdpr, avg, privacy, consent, polylang
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable tag: 3.1.6
+Stable tag: 4.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ VIEW! Privacy is ontwikkeld met als uitgangspunt de AVG/GDPR- en ePrivacy-regelg
 * Vanilla JavaScript, geen jQuery
 * Automatische blokkering van scripts, iframes en embeds totdat toestemming is gegeven
 * Ingebouwde ondersteuning voor Google Analytics 4, Google Tag Manager, Google Maps, YouTube, Meta Pixel, Hotjar en Microsoft Clarity — uitbreidbaar met eigen diensten
-* Volledig instelbare banner: positie, kleuren, lettergrootte, border-radius, schaduw en animatie
+* Volledig instelbare banner: positie, kleuren (inclusief knopkleuren), lettergrootte, border-radius, schaduw en animatie
 * Voorkeurencentrum met categorieën: Noodzakelijk, Voorkeuren, Statistieken, Marketing
 * Automatische herconsent bij wijziging van categorieën of banner (consentversiebeheer)
 * Optionele logging van toestemming (datum/tijd, consentversie)
@@ -78,6 +78,22 @@ Ja. VIEW! Privacy heeft een eigen, verplichte instelling voor de privacybeleidpa
 De statuskaarten op het dashboard (Analytics, YouTube, Google Maps) tonen niet alleen of een dienst is aangevinkt bij Instellingen, maar of deze daadwerkelijk op een bezochte pagina is aangetroffen en geblokkeerd. Staat een dienst pas sinds kort aan, of alleen op een pagina die nog niet bezocht is sinds het inschakelen? Dan is deze mogelijk nog niet "gezien". Bezoek de betreffende pagina eenmaal in de front-end om de status bij te werken (de plugin registreert dit met een rate-limit van maximaal één keer per 5 minuten).
 
 == Changelog ==
+
+= 4.0.0 =
+* Nieuwe bannerposities: links (smal) en onderaan over de volle breedte met de knoppen rechts.
+* Knoppen hebben instelbare tekst-, achtergrond- en randkleuren voor primaire en secundaire knoppen.
+* Branding op de pluginpagina: VIEW! by Zaal Design.
+
+
+= 3.1.9 =
+* Mobiele verbetering: de cookiebanner verschijnt na 5 seconden op schermen tot en met 767px breed, zodat bezoekers eerst de taalkeuze in het mobiele menu kunnen maken. Desktop blijft ongewijzigd.
+* Branding: plugin-overzicht toont als auteur "VIEW! by Zaal Design"; de externe "Bezoek plugin site"-link is verwijderd.
+
+
+= 3.1.8 =
+* Added native WordPress update checks for public GitHub Releases.
+* Updates use the release ZIP asset without changing existing plugin settings or consent data.
+* GitHub release checks run through the WordPress update system; visitor consent data is not sent to GitHub.
 
 = 3.1.6 =
 * Bugfix: bij het openen van het voorkeurencentrum (vanuit de banner, de herstelknop, een placeholder van geblokkeerde content, of via de externe trigger/API) werd de oorspronkelijke banner niet gesloten en bleef dus naast het voorkeurencentrum zichtbaar staan.
@@ -257,6 +273,10 @@ De statuskaarten op het dashboard (Analytics, YouTube, Google Maps) tonen niet a
 * WCAG 2.2 AA toegankelijkheid (focus-trap, aria-labels, toetsenbordnavigatie).
 
 == Upgrade Notice ==
+
+= 3.1.7 =
+Added native WordPress update checks for the public GitHub Releases. Existing plugin settings and visitor consent are retained; no new consent version is required.
+
 
 = 3.1.6 =
 Bugfix: banner sluit nu correct bij het openen van het voorkeurencentrum (en verschijnt terug als er zonder keuze wordt gesloten); privacybeleid-URL volgt nu betrouwbaar de Polylang-taal. Geen herconsent vereist.

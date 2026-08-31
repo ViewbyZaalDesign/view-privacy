@@ -100,8 +100,13 @@ class View_Privacy_Settings {
 		$old_categories = wp_json_encode( $old['categories'] ?? array() );
 		$new_categories = wp_json_encode( $new['categories'] ?? array() );
 
-		$old_banner_text = ( $old['banner']['text'] ?? '' ) . ( $old['banner']['title'] ?? '' );
-		$new_banner_text = ( $new['banner']['text'] ?? '' ) . ( $new['banner']['title'] ?? '' );
+		$old_banner_text = ( $old['banner']['text'] ?? '' ) . ( $old['banner']['title'] ?? '' ) . ( $old['banner']['heading'] ?? '' );
+		$new_banner_text = ( $new['banner']['text'] ?? '' ) . ( $new['banner']['title'] ?? '' ) . ( $new['banner']['heading'] ?? '' );
+		$button_fields = array( 'button_accept_all', 'button_reject_all', 'button_preferences', 'button_save', 'button_back', 'button_blocked', 'button_accept_service' );
+		foreach ( $button_fields as $button_field ) {
+			$old_banner_text .= $old['banner'][ $button_field ] ?? '';
+			$new_banner_text .= $new['banner'][ $button_field ] ?? '';
+		}
 
 		$old_services = wp_json_encode( $old['services'] ?? array() );
 		$new_services = wp_json_encode( $new['services'] ?? array() );
@@ -133,22 +138,30 @@ class View_Privacy_Settings {
 
 			$clean['banner']['tagline']        = isset( $b['tagline'] ) ? sanitize_text_field( wp_unslash( $b['tagline'] ) ) : $current['banner']['tagline'];
 			$clean['banner']['title']          = isset( $b['title'] ) ? sanitize_text_field( wp_unslash( $b['title'] ) ) : $current['banner']['title'];
+			$clean['banner']['heading']        = isset( $b['heading'] ) ? sanitize_text_field( wp_unslash( $b['heading'] ) ) : ( $current['banner']['heading'] ?? '' );
 			$clean['banner']['text']           = isset( $b['text'] ) ? sanitize_textarea_field( wp_unslash( $b['text'] ) ) : $current['banner']['text'];
 			// Logo is niet instelbaar: blijft altijd het vaste VIEW!-beeldmerk, ongeacht binnenkomende input.
 			$clean['banner']['logo']           = $current['banner']['logo'];
 			$clean['banner']['reopen_icon']    = isset( $b['reopen_icon'] ) ? esc_url_raw( wp_unslash( $b['reopen_icon'] ) ) : $current['banner']['reopen_icon'];
-			$clean['banner']['position']       = isset( $b['position'] ) && in_array( $b['position'], array( 'bottom', 'top', 'center' ), true ) ? $b['position'] : $current['banner']['position'];
+			$clean['banner']['position']       = 'left';
 			$clean['banner']['color_bg']       = isset( $b['color_bg'] ) ? sanitize_hex_color( $b['color_bg'] ) : $current['banner']['color_bg'];
 			$clean['banner']['color_text']     = isset( $b['color_text'] ) ? sanitize_hex_color( $b['color_text'] ) : $current['banner']['color_text'];
 			$clean['banner']['color_accent']   = isset( $b['color_accent'] ) ? sanitize_hex_color( $b['color_accent'] ) : $current['banner']['color_accent'];
+			$clean['banner']['button_primary_text']   = isset( $b['button_primary_text'] ) ? sanitize_text_field( wp_unslash( $b['button_primary_text'] ) ) : $current['banner']['button_primary_text'];
+			$clean['banner']['button_primary_bg']     = isset( $b['button_primary_bg'] ) ? sanitize_hex_color( $b['button_primary_bg'] ) : $current['banner']['button_primary_bg'];
+			$clean['banner']['button_primary_border'] = isset( $b['button_primary_border'] ) ? sanitize_hex_color( $b['button_primary_border'] ) : $current['banner']['button_primary_border'];
+			$clean['banner']['button_secondary_text']   = isset( $b['button_secondary_text'] ) ? sanitize_text_field( wp_unslash( $b['button_secondary_text'] ) ) : $current['banner']['button_secondary_text'];
+			$clean['banner']['button_secondary_bg']     = isset( $b['button_secondary_bg'] ) ? sanitize_hex_color( $b['button_secondary_bg'] ) : $current['banner']['button_secondary_bg'];
+			$clean['banner']['button_secondary_border'] = isset( $b['button_secondary_border'] ) ? sanitize_hex_color( $b['button_secondary_border'] ) : $current['banner']['button_secondary_border'];
 			$clean['banner']['font_size']      = isset( $b['font_size'] ) ? max( 10, min( 24, (int) $b['font_size'] ) ) : $current['banner']['font_size'];
 			$clean['banner']['border_radius']  = isset( $b['border_radius'] ) ? max( 0, min( 40, (int) $b['border_radius'] ) ) : $current['banner']['border_radius'];
 			$clean['banner']['shadow']         = ! empty( $b['shadow'] );
 			$clean['banner']['animation']      = ! empty( $b['animation'] );
 			$clean['banner']['use_theme_font'] = ! empty( $b['use_theme_font'] );
-			$clean['banner']['simple_mode']         = ! empty( $b['simple_mode'] );
-			$clean['banner']['simple_text']         = isset( $b['simple_text'] ) ? sanitize_textarea_field( wp_unslash( $b['simple_text'] ) ) : $current['banner']['simple_text'];
-			$clean['banner']['simple_button_label'] = isset( $b['simple_button_label'] ) ? sanitize_text_field( wp_unslash( $b['simple_button_label'] ) ) : $current['banner']['simple_button_label'];
+			$button_fields = array( 'button_accept_all', 'button_reject_all', 'button_preferences', 'button_save', 'button_back', 'button_blocked', 'button_accept_service' );
+			foreach ( $button_fields as $button_field ) {
+				$clean['banner'][ $button_field ] = isset( $b[ $button_field ] ) ? sanitize_text_field( wp_unslash( $b[ $button_field ] ) ) : $current['banner'][ $button_field ];
+			}
 		}
 
 		if ( isset( $input['categories'] ) && is_array( $input['categories'] ) ) {

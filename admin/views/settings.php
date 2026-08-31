@@ -53,24 +53,6 @@ $banner   = $settings['banner'];
 		<h2><?php esc_html_e( 'Banner', 'view-privacy' ); ?></h2>
 		<table class="form-table" role="presentation">
 			<tr>
-				<th scope="row"><?php esc_html_e( 'Alleen functionele cookies', 'view-privacy' ); ?></th>
-				<td>
-					<label>
-						<input type="checkbox" id="vp-simple-mode" name="view_privacy[banner][simple_mode]" value="1" <?php checked( ! empty( $banner['simple_mode'] ) ); ?> />
-						<?php esc_html_e( 'Deze site plaatst uitsluitend noodzakelijke/functionele cookies; toon een eenvoudige melding zonder toestemmingsvraag in plaats van de volledige banner.', 'view-privacy' ); ?>
-					</label>
-					<p class="description"><?php esc_html_e( 'Gebruik dit alleen als u zeker weet dat er geen statistiek-, voorkeur- of marketingcookies (zoals Google Analytics, advertentiepixels of embeds die cookies plaatsen) actief zijn. Controleer dit bij twijfel via het tabblad Diensten.', 'view-privacy' ); ?></p>
-				</td>
-			</tr>
-			<tr>
-				<th scope="row"><label for="vp-simple-text"><?php esc_html_e( 'Tekst bij "Alleen functionele cookies"', 'view-privacy' ); ?></label></th>
-				<td><textarea id="vp-simple-text" class="large-text" rows="2" name="view_privacy[banner][simple_text]"><?php echo esc_textarea( $banner['simple_text'] ); ?></textarea></td>
-			</tr>
-			<tr>
-				<th scope="row"><label for="vp-simple-button"><?php esc_html_e( 'Knoptekst', 'view-privacy' ); ?></label></th>
-				<td><input type="text" id="vp-simple-button" class="regular-text" name="view_privacy[banner][simple_button_label]" value="<?php echo esc_attr( $banner['simple_button_label'] ); ?>" /></td>
-			</tr>
-			<tr>
 				<th scope="row"><label for="vp-tagline"><?php esc_html_e( 'Tagline (boven de titel)', 'view-privacy' ); ?></label></th>
 				<td>
 					<input type="text" id="vp-tagline" class="regular-text" name="view_privacy[banner][tagline]" value="<?php echo esc_attr( $banner['tagline'] ); ?>" />
@@ -82,17 +64,35 @@ $banner   = $settings['banner'];
 				<td><input type="text" id="vp-title" class="regular-text" name="view_privacy[banner][title]" value="<?php echo esc_attr( $banner['title'] ); ?>" /></td>
 			</tr>
 			<tr>
-				<th scope="row"><label for="vp-text"><?php esc_html_e( 'Bannertekst', 'view-privacy' ); ?></label></th>
+				<th scope="row"><label for="vp-heading"><?php esc_html_e( 'Kopje boven hoofdtekst', 'view-privacy' ); ?></label></th>
+				<td>
+					<input type="text" id="vp-heading" class="regular-text" name="view_privacy[banner][heading]" value="<?php echo esc_attr( $banner['heading'] ); ?>" />
+					<p class="description"><?php esc_html_e( 'Optioneel kort kopje boven de hoofdtekst. Laat leeg als u geen extra kopje wilt tonen.', 'view-privacy' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="vp-text"><?php esc_html_e( 'Hoofdtekst', 'view-privacy' ); ?></label></th>
 				<td><textarea id="vp-text" class="large-text" rows="4" name="view_privacy[banner][text]"><?php echo esc_textarea( $banner['text'] ); ?></textarea></td>
 			</tr>
 			<tr>
 				<th scope="row"><label for="vp-position"><?php esc_html_e( 'Positie', 'view-privacy' ); ?></label></th>
 				<td>
 					<select id="vp-position" name="view_privacy[banner][position]">
-						<option value="bottom" <?php selected( $banner['position'], 'bottom' ); ?>><?php esc_html_e( 'Onderaan', 'view-privacy' ); ?></option>
-						<option value="top" <?php selected( $banner['position'], 'top' ); ?>><?php esc_html_e( 'Bovenaan', 'view-privacy' ); ?></option>
-						<option value="center" <?php selected( $banner['position'], 'center' ); ?>><?php esc_html_e( 'Gecentreerd (modaal)', 'view-privacy' ); ?></option>
+						<option value="left" selected><?php esc_html_e( 'Links (smal, onderaan uitgelijnd)', 'view-privacy' ); ?></option>
 					</select>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Teksten van de knoppen', 'view-privacy' ); ?></th>
+				<td>
+					<p class="description"><?php esc_html_e( 'Pas de teksten van de knoppen aan de organisatie en de website aan. Deze teksten worden ook gebruikt in het voorkeurencentrum.', 'view-privacy' ); ?></p>
+					<label><?php esc_html_e( 'Alles accepteren', 'view-privacy' ); ?><br /><input type="text" class="regular-text" name="view_privacy[banner][button_accept_all]" value="<?php echo esc_attr( $banner['button_accept_all'] ); ?>" /></label><br /><br />
+					<label><?php esc_html_e( 'Alles weigeren', 'view-privacy' ); ?><br /><input type="text" class="regular-text" name="view_privacy[banner][button_reject_all]" value="<?php echo esc_attr( $banner['button_reject_all'] ); ?>" /></label><br /><br />
+					<label><?php esc_html_e( 'Voorkeuren', 'view-privacy' ); ?><br /><input type="text" class="regular-text" name="view_privacy[banner][button_preferences]" value="<?php echo esc_attr( $banner['button_preferences'] ); ?>" /></label><br /><br />
+					<label><?php esc_html_e( 'Voorkeuren opslaan', 'view-privacy' ); ?><br /><input type="text" class="regular-text" name="view_privacy[banner][button_save]" value="<?php echo esc_attr( $banner['button_save'] ); ?>" /></label><br /><br />
+					<label><?php esc_html_e( 'Terug', 'view-privacy' ); ?><br /><input type="text" class="regular-text" name="view_privacy[banner][button_back]" value="<?php echo esc_attr( $banner['button_back'] ); ?>" /></label><br /><br />
+					<label><?php esc_html_e( 'Cookies aanpassen', 'view-privacy' ); ?><br /><input type="text" class="regular-text" name="view_privacy[banner][button_blocked]" value="<?php echo esc_attr( $banner['button_blocked'] ); ?>" /></label><br /><br />
+					<label><?php esc_html_e( 'Cookies accepteren', 'view-privacy' ); ?><br /><input type="text" class="regular-text" name="view_privacy[banner][button_accept_service]" value="<?php echo esc_attr( $banner['button_accept_service'] ); ?>" /></label>
 				</td>
 			</tr>
 			<tr>
@@ -101,6 +101,20 @@ $banner   = $settings['banner'];
 					<label><?php esc_html_e( 'Achtergrond', 'view-privacy' ); ?> <input type="text" class="vp-color-field" name="view_privacy[banner][color_bg]" value="<?php echo esc_attr( $banner['color_bg'] ); ?>" /></label><br />
 					<label><?php esc_html_e( 'Tekst', 'view-privacy' ); ?> <input type="text" class="vp-color-field" name="view_privacy[banner][color_text]" value="<?php echo esc_attr( $banner['color_text'] ); ?>" /></label><br />
 					<label><?php esc_html_e( 'Accent (knoppen)', 'view-privacy' ); ?> <input type="text" class="vp-color-field" name="view_privacy[banner][color_accent]" value="<?php echo esc_attr( $banner['color_accent'] ); ?>" /></label>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Knoppen', 'view-privacy' ); ?></th>
+				<td>
+					<strong><?php esc_html_e( 'Primaire knop (accepteren)', 'view-privacy' ); ?></strong><br />
+					<label><?php esc_html_e( 'Tekst', 'view-privacy' ); ?> <input type="text" class="regular-text" name="view_privacy[banner][button_primary_text]" value="<?php echo esc_attr( $banner['button_primary_text'] ); ?>" /></label>
+					<label><?php esc_html_e( 'Achtergrond', 'view-privacy' ); ?> <input type="text" class="vp-color-field" name="view_privacy[banner][button_primary_bg]" value="<?php echo esc_attr( $banner['button_primary_bg'] ); ?>" /></label>
+					<label><?php esc_html_e( 'Rand', 'view-privacy' ); ?> <input type="text" class="vp-color-field" name="view_privacy[banner][button_primary_border]" value="<?php echo esc_attr( $banner['button_primary_border'] ); ?>" /></label>
+					<br /><br />
+					<strong><?php esc_html_e( 'Secundaire knoppen', 'view-privacy' ); ?></strong><br />
+					<label><?php esc_html_e( 'Tekst', 'view-privacy' ); ?> <input type="text" class="regular-text" name="view_privacy[banner][button_secondary_text]" value="<?php echo esc_attr( $banner['button_secondary_text'] ); ?>" /></label>
+					<label><?php esc_html_e( 'Achtergrond', 'view-privacy' ); ?> <input type="text" class="vp-color-field" name="view_privacy[banner][button_secondary_bg]" value="<?php echo esc_attr( $banner['button_secondary_bg'] ); ?>" /></label>
+					<label><?php esc_html_e( 'Rand', 'view-privacy' ); ?> <input type="text" class="vp-color-field" name="view_privacy[banner][button_secondary_border]" value="<?php echo esc_attr( $banner['button_secondary_border'] ); ?>" /></label>
 				</td>
 			</tr>
 			<tr>

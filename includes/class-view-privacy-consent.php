@@ -232,8 +232,18 @@ class View_Privacy_Consent {
 		pll_register_string( 'vp_banner_tagline', $settings['banner']['tagline'], $group );
 		pll_register_string( 'vp_banner_title', $settings['banner']['title'], $group );
 		pll_register_string( 'vp_banner_text', $settings['banner']['text'], $group, true );
-		pll_register_string( 'vp_banner_simple_text', $settings['banner']['simple_text'], $group, true );
-		pll_register_string( 'vp_banner_simple_button_label', $settings['banner']['simple_button_label'], $group );
+		$button_fields = array(
+			'button_accept_all' => 'vp_button_accept_all',
+			'button_reject_all' => 'vp_button_reject_all',
+			'button_preferences' => 'vp_button_preferences',
+			'button_save' => 'vp_button_save',
+			'button_back' => 'vp_button_back',
+			'button_blocked' => 'vp_button_blocked',
+			'button_accept_service' => 'vp_button_accept_service',
+		);
+		foreach ( $button_fields as $field => $name ) {
+			pll_register_string( $name, $settings['banner'][ $field ], $group );
+		}
 
 		// Cookiecategorieën.
 		foreach ( $settings['categories'] as $key => $cat ) {
@@ -345,8 +355,18 @@ class View_Privacy_Consent {
 		$settings['banner']['tagline']             = $this->translate_content_field( $settings['banner']['tagline'], 'Uw privacy. Uw keuze.' );
 		$settings['banner']['title']               = $this->translate_content_field( $settings['banner']['title'], 'Wij respecteren uw privacy' );
 		$settings['banner']['text']                = $this->translate_content_field( $settings['banner']['text'], 'Wij gebruiken cookies om onze website te laten functioneren en, met uw toestemming, om statistieken te verzamelen en content te personaliseren. U kunt uw voorkeuren op elk moment aanpassen.' );
-		$settings['banner']['simple_text']         = $this->translate_content_field( $settings['banner']['simple_text'], 'Deze site plaatst alleen functionele cookies waarvoor geen toestemming nodig is.' );
-		$settings['banner']['simple_button_label'] = $this->translate_content_field( $settings['banner']['simple_button_label'], 'Ga verder naar de site' );
+		$button_defaults = array(
+			'button_accept_all' => 'Alles accepteren',
+			'button_reject_all' => 'Alles weigeren',
+			'button_preferences' => 'Voorkeuren',
+			'button_save' => 'Voorkeuren opslaan',
+			'button_back' => 'Terug',
+			'button_blocked' => 'Cookies aanpassen',
+			'button_accept_service' => 'Cookies accepteren',
+		);
+		foreach ( $button_defaults as $field => $default ) {
+			$settings['banner'][ $field ] = $this->translate_content_field( $settings['banner'][ $field ], $default );
+		}
 
 		$category_defaults = array(
 			'necessary'   => array(
@@ -418,14 +438,14 @@ class View_Privacy_Consent {
 				VIEW_PRIVACY_VERSION
 			),
 			'i18n'            => array(
-				'acceptAll'     => $this->pll_translate( __( 'Alles accepteren', 'view-privacy' ) ),
-				'rejectAll'     => $this->pll_translate( __( 'Alles weigeren', 'view-privacy' ) ),
-				'preferences'   => $this->pll_translate( __( 'Voorkeuren', 'view-privacy' ) ),
-				'save'          => $this->pll_translate( __( 'Voorkeuren opslaan', 'view-privacy' ) ),
-				'back'          => $this->pll_translate( __( 'Terug', 'view-privacy' ) ),
+				'acceptAll'     => $settings['banner']['button_accept_all'],
+				'rejectAll'     => $settings['banner']['button_reject_all'],
+				'preferences'   => $settings['banner']['button_preferences'],
+				'save'          => $settings['banner']['button_save'],
+				'back'          => $settings['banner']['button_back'],
 				'blockedTitle'  => $this->pll_translate( __( 'Inhoud geblokkeerd', 'view-privacy' ) ),
-				'blockedButton' => $this->pll_translate( __( 'Cookies aanpassen', 'view-privacy' ) ),
-				'acceptService' => $this->pll_translate( __( 'Cookies accepteren', 'view-privacy' ) ),
+				'blockedButton' => $settings['banner']['button_blocked'],
+				'acceptService' => $settings['banner']['button_accept_service'],
 				/* translators: %s: naam van de dienst, bv. Google Maps. */
 				'loadService'   => $this->pll_translate( __( '%s laden', 'view-privacy' ) ),
 				'privacyLink'   => $this->pll_translate( __( 'Privacybeleid', 'view-privacy' ) ),

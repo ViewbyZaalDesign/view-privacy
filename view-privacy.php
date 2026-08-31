@@ -1,13 +1,12 @@
 <?php
 /**
  * Plugin Name:       VIEW! Privacy
- * Plugin URI:         https://example.com/view-privacy
  * Description:        Lichtgewicht, privacy-first cookieconsent-plugin voor WordPress. Ontwikkeld met als uitgangspunt de AVG/GDPR- en ePrivacy-regelgeving, zonder externe cloudservices of abonnementen.
- * Version:            3.1.6
+ * Version:            4.0.0
  * Requires at least:  6.8
  * Requires PHP:       8.1
- * Author:             VIEW!
- * Author URI:         https://example.com
+ * Author:             VIEW! by Zaal Design
+ * Author URI:         https://zaaldesign.nl
  * License:             GPL v2 or later
  * License URI:         https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:        view-privacy
@@ -26,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Constants
 // --------------------------------------------------------------------
 
-define( 'VIEW_PRIVACY_VERSION', '3.1.6' );
+define( 'VIEW_PRIVACY_VERSION', '4.0.0' );
 define( 'VIEW_PRIVACY_CONSENT_VERSION', 1 ); // Ophogen bij wijziging van categorieën/banner om herconsent te forceren.
 define( 'VIEW_PRIVACY_FILE', __FILE__ );
 define( 'VIEW_PRIVACY_PATH', plugin_dir_path( __FILE__ ) );
@@ -74,6 +73,7 @@ require_once VIEW_PRIVACY_PATH . 'includes/class-view-privacy-scripts.php';
 require_once VIEW_PRIVACY_PATH . 'includes/class-view-privacy-logging.php';
 require_once VIEW_PRIVACY_PATH . 'includes/class-view-privacy-rest.php';
 require_once VIEW_PRIVACY_PATH . 'includes/class-view-privacy-import-export.php';
+require_once VIEW_PRIVACY_PATH . 'includes/class-view-privacy-updater.php';
 
 if ( is_admin() ) {
 	require_once VIEW_PRIVACY_PATH . 'admin/class-view-privacy-admin.php';
@@ -105,6 +105,7 @@ function view_privacy_init() {
 	View_Privacy_Logging::instance();
 	View_Privacy_REST::instance();
 	View_Privacy_Import_Export::instance();
+	View_Privacy_Updater::instance();
 
 	if ( is_admin() ) {
 		View_Privacy_Admin::instance();

@@ -267,11 +267,7 @@ if ( ! empty( $missing_translations ) && function_exists( 'pll_languages_list' )
 		<div class="vp-card">
 			<span class="vp-card-label"><?php esc_html_e( 'Bannermodus', 'view-privacy' ); ?></span>
 			<span class="vp-card-value">
-				<?php if ( ! empty( $settings['banner']['simple_mode'] ) ) : ?>
-					<span class="vp-badge vp-badge-neutral"><?php esc_html_e( 'Alleen functionele cookies', 'view-privacy' ); ?></span>
-				<?php else : ?>
-					<span class="vp-badge vp-badge-success"><?php esc_html_e( 'Volledig', 'view-privacy' ); ?></span>
-				<?php endif; ?>
+				<span class="vp-badge vp-badge-success"><?php esc_html_e( 'Volledig', 'view-privacy' ); ?></span>
 			</span>
 		</div>
 		<div class="vp-card">
