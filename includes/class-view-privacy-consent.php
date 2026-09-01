@@ -355,6 +355,8 @@ class View_Privacy_Consent {
 		$settings['banner']['tagline']             = $this->translate_content_field( $settings['banner']['tagline'], 'Uw privacy. Uw keuze.' );
 		$settings['banner']['title']               = $this->translate_content_field( $settings['banner']['title'], 'Wij respecteren uw privacy' );
 		$settings['banner']['text']                = $this->translate_content_field( $settings['banner']['text'], 'Wij gebruiken cookies om onze website te laten functioneren en, met uw toestemming, om statistieken te verzamelen en content te personaliseren. U kunt uw voorkeuren op elk moment aanpassen.' );
+		$settings['banner']['simple_text']         = $this->translate_content_field( $settings['banner']['simple_text'], 'Deze site plaatst alleen functionele cookies waarvoor geen toestemming nodig is.' );
+		$settings['banner']['simple_button_label'] = $this->translate_content_field( $settings['banner']['simple_button_label'], 'Ga verder naar de site' );
 		$button_defaults = array(
 			'button_accept_all' => 'Alles accepteren',
 			'button_reject_all' => 'Alles weigeren',

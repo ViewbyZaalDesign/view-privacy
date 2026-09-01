@@ -4,7 +4,7 @@ Tags: cookies, gdpr, avg, privacy, consent, polylang
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable tag: 4.0.0
+Stable tag: 4.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ VIEW! Privacy is ontwikkeld met als uitgangspunt de AVG/GDPR- en ePrivacy-regelg
 * Vanilla JavaScript, geen jQuery
 * Automatische blokkering van scripts, iframes en embeds totdat toestemming is gegeven
 * Ingebouwde ondersteuning voor Google Analytics 4, Google Tag Manager, Google Maps, YouTube, Meta Pixel, Hotjar en Microsoft Clarity — uitbreidbaar met eigen diensten
-* Volledig instelbare banner: positie, kleuren (inclusief knopkleuren), lettergrootte, border-radius, schaduw en animatie
+* Volledig instelbare banner: vaste positie linksonder, kleuren (inclusief knopkleuren), lettergrootte, border-radius, schaduw en animatie
 * Voorkeurencentrum met categorieën: Noodzakelijk, Voorkeuren, Statistieken, Marketing
 * Automatische herconsent bij wijziging van categorieën of banner (consentversiebeheer)
 * Optionele logging van toestemming (datum/tijd, consentversie)
@@ -79,10 +79,16 @@ De statuskaarten op het dashboard (Analytics, YouTube, Google Maps) tonen niet a
 
 == Changelog ==
 
+= 4.0.1 =
+* Betrouwbare native WordPress/GitHub-updateintegratie met expliciete release-assets, response/no_update-metadata en cacheverversing.
+* Releasepakket wordt gevalideerd op de vaste mapstructuur `view-privacy/view-privacy.php`.
+* Herstelt de 3.x-modus voor uitsluitend functionele cookies en versterkt multisite- en consentlogging-afhandeling.
+
 = 4.0.0 =
-* Nieuwe bannerposities: links (smal) en onderaan over de volle breedte met de knoppen rechts.
+* Banner staat links onderaan; deze positie is in 4.0.0 vastgezet.
 * Knoppen hebben instelbare tekst-, achtergrond- en randkleuren voor primaire en secundaire knoppen.
 * Branding op de pluginpagina: VIEW! by Zaal Design.
+* De bestaande modus "Alleen functionele cookies" blijft beschikbaar voor installaties die deze in 3.x al gebruikten.
 
 
 = 3.1.9 =

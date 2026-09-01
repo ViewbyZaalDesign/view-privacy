@@ -153,6 +153,11 @@ class View_Privacy_Admin {
 			case 'save_services':
 				check_admin_referer( 'view_privacy_save_services' );
 				$input    = array( 'services' => isset( $_POST['services'] ) ? wp_unslash( $_POST['services'] ) : array() ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
+				$new_key  = isset( $_POST['vp_new_service_key'] ) ? sanitize_key( wp_unslash( $_POST['vp_new_service_key'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$new_data = isset( $_POST['vp_new_service'] ) ? wp_unslash( $_POST['vp_new_service'] ) : array(); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				if ( $new_key && is_array( $new_data ) && ! empty( $new_data['patterns'] ) ) {
+					$input['services'][ $new_key ] = $new_data;
+				}
 				View_Privacy_Settings::instance()->save_settings( $this->sanitize_recursive_strings( $input ) );
 				add_action( 'admin_notices', array( $this, 'notice_settings_saved' ) );
 				break;

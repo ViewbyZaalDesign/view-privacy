@@ -23,7 +23,8 @@
 			date.setTime( date.getTime() + days * 24 * 60 * 60 * 1000 );
 			expires = '; expires=' + date.toUTCString();
 		}
-		document.cookie = name + '=' + encodeURIComponent( value ) + expires + '; path=/; SameSite=Lax';
+		var secure = window.location.protocol === 'https:' ? '; Secure' : '';
+		document.cookie = name + '=' + encodeURIComponent( value ) + expires + '; path=/; SameSite=Lax' + secure;
 	}
 
 	function getCookie( name ) {
@@ -195,11 +196,11 @@
 	 * zet deze veilig op een element via setAttribute (geen innerHTML/eval).
 	 */
 	function applyRawAttributes( el, raw ) {
-		var attrRegex = /([a-zA-Z0-9_-]+)\s*=\s*"([^"]*)"/g;
+		var attrRegex = /([a-zA-Z0-9_-]+)\s*=\s*(["'])(.*?)\2/g;
 		var match;
 		while ( ( match = attrRegex.exec( raw ) ) !== null ) {
 			try {
-				el.setAttribute( match[ 1 ], match[ 2 ] );
+				el.setAttribute( match[ 1 ], match[ 3 ] );
 			} catch ( e ) {
 				// Ongeldig attribuut negeren.
 			}
@@ -521,6 +522,44 @@
 		return el;
 	}
 
+	function createSimpleBanner() {
+		var b = config.banner;
+		var el = document.createElement( 'div' );
+		el.className = 'vp-banner vp-banner--' + b.position;
+		if ( b.shadow ) { el.className += ' vp-banner--shadow'; }
+		if ( b.animation ) { el.className += ' vp-banner--animate'; }
+		el.setAttribute( 'role', 'dialog' );
+		el.setAttribute( 'aria-modal', 'false' );
+		el.setAttribute( 'aria-label', b.title );
+		applyStyleVars( el );
+
+		var header = document.createElement( 'div' );
+		header.className = 'vp-banner__header';
+		if ( b.logo ) {
+			var logo = document.createElement( 'img' );
+			logo.className = 'vp-banner__logo';
+			logo.src = b.logo;
+			logo.alt = '';
+			header.appendChild( logo );
+		}
+		var title = document.createElement( 'p' );
+		title.className = 'vp-banner__title';
+		title.textContent = b.title;
+		header.appendChild( title );
+		var text = document.createElement( 'p' );
+		text.className = 'vp-banner__text';
+		text.textContent = b.simple_text;
+		var actions = document.createElement( 'div' );
+		actions.className = 'vp-banner__actions';
+		actions.appendChild( makeButton( b.simple_button_label, 'vp-btn--primary', finalizeSimpleAck ) );
+		var privacyLink = makePrivacyLink();
+		if ( privacyLink ) { actions.appendChild( privacyLink ); }
+		el.appendChild( header );
+		el.appendChild( text );
+		el.appendChild( actions );
+		return el;
+	}
+
 	function makePrivacyLink() {
 		if ( ! config.privacyPolicyUrl ) {
 			return null;
@@ -571,7 +610,7 @@
 		if ( bannerEl ) {
 			return;
 		}
-		bannerEl = createBanner();
+		bannerEl = config.banner.simple_mode ? createSimpleBanner() : createBanner();
 		document.body.appendChild( bannerEl );
 	}
 
@@ -895,7 +934,9 @@
 		if ( consent ) {
 			applyConsent( consent.categories );
 			renderAllPlaceholders( consent.categories );
-			showReopenButton();
+			if ( ! config.banner.simple_mode ) {
+				showReopenButton();
+			}
 			return;
 		}
 

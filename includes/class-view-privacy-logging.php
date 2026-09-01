@@ -57,6 +57,9 @@ class View_Privacy_Logging {
 		if ( empty( $settings['logging']['enabled'] ) ) {
 			return false;
 		}
+		if ( ! $this->allow_log_write( $categories, $version ) ) {
+			return false;
+		}
 
 		global $wpdb;
 		$table = $wpdb->prefix . VIEW_PRIVACY_LOG_TABLE;
@@ -86,6 +89,25 @@ class View_Privacy_Logging {
 		);
 
 		return false !== $result;
+	}
+
+	/**
+	 * Limits identical public consent submissions to one write per five minutes.
+	 * The transient key contains only a one-way hash and no stored raw IP data.
+	 *
+	 * @param array $categories Consent categories.
+	 * @param int   $version Consent version.
+	 * @return bool
+	 */
+	private function allow_log_write( $categories, $version ) {
+		$ip = $this->get_client_ip();
+		$key_material = $ip . '|' . wp_json_encode( $categories ) . '|' . (int) $version;
+		$key = 'view_privacy_log_rate_' . substr( hash( 'sha256', $key_material . wp_salt( 'nonce' ) ), 0, 32 );
+		if ( get_transient( $key ) ) {
+			return false;
+		}
+		set_transient( $key, 1, 5 * MINUTE_IN_SECONDS );
+		return true;
 	}
 
 	/**

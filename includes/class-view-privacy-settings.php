@@ -147,10 +147,10 @@ class View_Privacy_Settings {
 			$clean['banner']['color_bg']       = isset( $b['color_bg'] ) ? sanitize_hex_color( $b['color_bg'] ) : $current['banner']['color_bg'];
 			$clean['banner']['color_text']     = isset( $b['color_text'] ) ? sanitize_hex_color( $b['color_text'] ) : $current['banner']['color_text'];
 			$clean['banner']['color_accent']   = isset( $b['color_accent'] ) ? sanitize_hex_color( $b['color_accent'] ) : $current['banner']['color_accent'];
-			$clean['banner']['button_primary_text']   = isset( $b['button_primary_text'] ) ? sanitize_text_field( wp_unslash( $b['button_primary_text'] ) ) : $current['banner']['button_primary_text'];
+			$clean['banner']['button_primary_text']   = isset( $b['button_primary_text'] ) ? sanitize_hex_color( $b['button_primary_text'] ) : $current['banner']['button_primary_text'];
 			$clean['banner']['button_primary_bg']     = isset( $b['button_primary_bg'] ) ? sanitize_hex_color( $b['button_primary_bg'] ) : $current['banner']['button_primary_bg'];
 			$clean['banner']['button_primary_border'] = isset( $b['button_primary_border'] ) ? sanitize_hex_color( $b['button_primary_border'] ) : $current['banner']['button_primary_border'];
-			$clean['banner']['button_secondary_text']   = isset( $b['button_secondary_text'] ) ? sanitize_text_field( wp_unslash( $b['button_secondary_text'] ) ) : $current['banner']['button_secondary_text'];
+			$clean['banner']['button_secondary_text']   = isset( $b['button_secondary_text'] ) ? sanitize_hex_color( $b['button_secondary_text'] ) : $current['banner']['button_secondary_text'];
 			$clean['banner']['button_secondary_bg']     = isset( $b['button_secondary_bg'] ) ? sanitize_hex_color( $b['button_secondary_bg'] ) : $current['banner']['button_secondary_bg'];
 			$clean['banner']['button_secondary_border'] = isset( $b['button_secondary_border'] ) ? sanitize_hex_color( $b['button_secondary_border'] ) : $current['banner']['button_secondary_border'];
 			$clean['banner']['font_size']      = isset( $b['font_size'] ) ? max( 10, min( 24, (int) $b['font_size'] ) ) : $current['banner']['font_size'];
@@ -158,6 +158,11 @@ class View_Privacy_Settings {
 			$clean['banner']['shadow']         = ! empty( $b['shadow'] );
 			$clean['banner']['animation']      = ! empty( $b['animation'] );
 			$clean['banner']['use_theme_font'] = ! empty( $b['use_theme_font'] );
+			// Deze drie velden zijn sinds 3.x publiek ondersteund; behoud ze
+			// expliciet voor bestaande installaties en imports.
+			$clean['banner']['simple_mode']         = ! empty( $b['simple_mode'] );
+			$clean['banner']['simple_text']         = isset( $b['simple_text'] ) ? sanitize_textarea_field( wp_unslash( $b['simple_text'] ) ) : $current['banner']['simple_text'];
+			$clean['banner']['simple_button_label'] = isset( $b['simple_button_label'] ) ? sanitize_text_field( wp_unslash( $b['simple_button_label'] ) ) : $current['banner']['simple_button_label'];
 			$button_fields = array( 'button_accept_all', 'button_reject_all', 'button_preferences', 'button_save', 'button_back', 'button_blocked', 'button_accept_service' );
 			foreach ( $button_fields as $button_field ) {
 				$clean['banner'][ $button_field ] = isset( $b[ $button_field ] ) ? sanitize_text_field( wp_unslash( $b[ $button_field ] ) ) : $current['banner'][ $button_field ];

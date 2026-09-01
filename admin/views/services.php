@@ -64,6 +64,22 @@ $categories = $settings['categories'];
 				<th scope="row"><label for="vp-new-service-key"><?php esc_html_e( 'Sleutel (uniek, kleine letters, geen spaties)', 'view-privacy' ); ?></label></th>
 				<td><input type="text" id="vp-new-service-key" name="vp_new_service_key" class="regular-text" placeholder="bijv. mijn_dienst" /></td>
 			</tr>
+			<tr>
+				<th scope="row"><label for="vp-new-service-label"><?php esc_html_e( 'Naam', 'view-privacy' ); ?></label></th>
+				<td><input type="text" id="vp-new-service-label" name="vp_new_service[label]" class="regular-text" placeholder="bijv. Matomo" /></td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="vp-new-service-category"><?php esc_html_e( 'Categorie', 'view-privacy' ); ?></label></th>
+				<td><select id="vp-new-service-category" name="vp_new_service[category]"><?php foreach ( $categories as $cat_key => $cat ) : if ( 'necessary' !== $cat_key ) : ?><option value="<?php echo esc_attr( $cat_key ); ?>"><?php echo esc_html( $cat['label'] ); ?></option><?php endif; endforeach; ?></select></td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="vp-new-service-patterns"><?php esc_html_e( 'Herkenningspatronen', 'view-privacy' ); ?></label></th>
+				<td><textarea id="vp-new-service-patterns" name="vp_new_service[patterns]" class="large-text" rows="3" placeholder="example.com/script.js"></textarea><p class="description"><?php esc_html_e( 'Eén patroon per regel.', 'view-privacy' ); ?></p></td>
+			</tr>
+			<tr>
+				<th scope="row"><?php esc_html_e( 'Actief', 'view-privacy' ); ?></th>
+				<td><label><input type="checkbox" name="vp_new_service[enabled]" value="1" checked /> <?php esc_html_e( 'Direct inschakelen', 'view-privacy' ); ?></label></td>
+			</tr>
 		</table>
 		<p class="description"><?php esc_html_e( 'Sla het formulier op en de nieuwe dienst verschijnt hierboven om verder te configureren.', 'view-privacy' ); ?></p>
 

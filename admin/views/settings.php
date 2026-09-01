@@ -53,6 +53,21 @@ $banner   = $settings['banner'];
 		<h2><?php esc_html_e( 'Banner', 'view-privacy' ); ?></h2>
 		<table class="form-table" role="presentation">
 			<tr>
+				<th scope="row"><?php esc_html_e( 'Alleen functionele cookies', 'view-privacy' ); ?></th>
+				<td>
+					<label><input type="checkbox" name="view_privacy[banner][simple_mode]" value="1" <?php checked( ! empty( $banner['simple_mode'] ) ); ?> /> <?php esc_html_e( 'Toon een eenvoudige melding zonder toestemmingsvraag wanneer uitsluitend noodzakelijke/functionele cookies worden gebruikt.', 'view-privacy' ); ?></label>
+					<p class="description"><?php esc_html_e( 'Schakel dit alleen in wanneer statistiek-, marketing- en externe-mediadiensten uit staan.', 'view-privacy' ); ?></p>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="vp-simple-text"><?php esc_html_e( 'Tekst eenvoudige melding', 'view-privacy' ); ?></label></th>
+				<td><textarea id="vp-simple-text" class="large-text" rows="2" name="view_privacy[banner][simple_text]"><?php echo esc_textarea( $banner['simple_text'] ); ?></textarea></td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="vp-simple-button"><?php esc_html_e( 'Knoptekst eenvoudige melding', 'view-privacy' ); ?></label></th>
+				<td><input type="text" id="vp-simple-button" class="regular-text" name="view_privacy[banner][simple_button_label]" value="<?php echo esc_attr( $banner['simple_button_label'] ); ?>" /></td>
+			</tr>
+			<tr>
 				<th scope="row"><label for="vp-tagline"><?php esc_html_e( 'Tagline (boven de titel)', 'view-privacy' ); ?></label></th>
 				<td>
 					<input type="text" id="vp-tagline" class="regular-text" name="view_privacy[banner][tagline]" value="<?php echo esc_attr( $banner['tagline'] ); ?>" />
