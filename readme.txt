@@ -386,4 +386,3 @@ Voegt een privacy-/cookiebeleidlink en dashboard-branding toe. Geen herconsent v
 = 1.0.0 =
 Eerste release van VIEW! Privacy.
 
-Validation workflow enabled for 4.0.1.
