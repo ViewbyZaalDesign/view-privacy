@@ -36,7 +36,13 @@ class View_Privacy_Updater {
 		// Run before Plugin_Upgrader's priority-10 deactivation hook.
 		add_filter( 'upgrader_pre_install', array( $this, 'remember_activation_state_before_upgrade' ), 9, 2 );
 		add_filter( 'upgrader_post_install', array( $this, 'restore_activation_state_after_upgrade' ), 11, 2 );
+		add_action( 'delete_site_transient_update_plugins', array( $this, 'clear_github_cache_after_plugin_check' ) );
 		add_action( 'upgrader_process_complete', array( $this, 'clear_cache_after_upgrade' ), 10, 2 );
+	}
+
+	/** Clears the GitHub release cache when WordPress starts a fresh plugin update check. */
+	public function clear_github_cache_after_plugin_check() {
+		self::clear_github_cache();
 	}
 
 	/** Records this plugin's activation mode before WordPress deactivates it for an interactive update. */
@@ -175,9 +181,13 @@ class View_Privacy_Updater {
 	}
 
 	public static function clear_update_cache() {
+		self::clear_github_cache();
+		delete_site_transient( 'update_plugins' );
+	}
+
+	private static function clear_github_cache() {
 		delete_site_transient( self::CACHE_KEY );
 		delete_site_transient( self::VALIDATORS_KEY );
-		delete_site_transient( 'update_plugins' );
 	}
 
 	/** @return array|null */
@@ -244,7 +254,7 @@ class View_Privacy_Updater {
 		}
 		$expected = VIEW_PRIVACY_RELEASE_ASSET_PREFIX . $version . '.zip';
 		foreach ( $release['assets'] as $asset ) {
-			if ( ! empty( $asset['name'] ) && $expected === $asset['name'] && ! empty( $asset['browser_download_url'] ) && 'application/zip' === ( $asset['content_type'] ?? 'application/zip' ) ) {
+			if ( ! empty( $asset['name'] ) && $expected === $asset['name'] && ! empty( $asset['browser_download_url'] ) && in_array( $asset['content_type'] ?? '', array( 'application/zip', 'application/x-zip-compressed' ), true ) ) {
 				return esc_url_raw( $asset['browser_download_url'] );
 			}
 		}

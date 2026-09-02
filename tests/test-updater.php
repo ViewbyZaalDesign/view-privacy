@@ -1,7 +1,7 @@
 <?php
 /** Minimal dependency-free regression tests for the external update contract. */
 define( 'ABSPATH', __DIR__ );
-define( 'VIEW_PRIVACY_VERSION', '4.0.3' );
+define( 'VIEW_PRIVACY_VERSION', '4.0.4' );
 define( 'VIEW_PRIVACY_REQUIRES_WP', '6.8' );
 define( 'VIEW_PRIVACY_REQUIRES_PHP', '8.1' );
 define( 'VIEW_PRIVACY_TESTED_WP', '6.8' );
@@ -16,8 +16,9 @@ $site_active_plugins = array();
 $network_active_plugins = array();
 $is_multisite = false;
 $activation_calls = array();
+$registered_actions = array();
 function add_filter() {}
-function add_action() {}
+function add_action( $hook, $callback = null, $priority = 10, $accepted_args = 1 ) { global $registered_actions; $registered_actions[ $hook ][] = array( $callback, $priority, $accepted_args ); }
 function get_site_transient( $key ) { global $transients; return $transients[ $key ] ?? false; }
 function set_site_transient( $key, $value ) { global $transients; $transients[ $key ] = $value; }
 function delete_site_transient( $key ) { global $transients; unset( $transients[ $key ] ); }
@@ -44,18 +45,18 @@ require dirname( __DIR__ ) . '/includes/class-view-privacy-updater.php';
 function expect( $condition, $message ) { if ( ! $condition ) { fwrite( STDERR, "FAIL: $message\n" ); exit( 1 ); } }
 
 $remote_release = array(
-	'tag_name' => 'v4.0.4', 'html_url' => 'https://example.test/release', 'published_at' => '2026-09-01T00:00:00Z',
-	'assets' => array( array( 'name' => 'view-privacy-4.0.4.zip', 'content_type' => 'application/zip', 'browser_download_url' => 'https://example.test/view-privacy-4.0.4.zip' ) ),
+	'tag_name' => 'v4.0.5', 'html_url' => 'https://example.test/release', 'published_at' => '2026-09-01T00:00:00Z',
+	'assets' => array( array( 'name' => 'view-privacy-4.0.5.zip', 'content_type' => 'application/zip', 'browser_download_url' => 'https://example.test/view-privacy-4.0.5.zip' ) ),
 );
 $updater = View_Privacy_Updater::instance();
 $result = $updater->check_for_update( (object) array() );
 expect( isset( $result->response[ VIEW_PRIVACY_BASENAME ] ), 'newer release must populate response' );
 $item = $result->response[ VIEW_PRIVACY_BASENAME ];
 foreach ( array( 'id', 'plugin', 'new_version', 'package', 'requires', 'requires_php', 'tested', 'autoupdate' ) as $field ) { expect( property_exists( $item, $field ), "response item misses $field" ); }
-expect( '4.0.4' === $item->new_version, 'release version must be parsed' );
+expect( '4.0.5' === $item->new_version, 'release version must be parsed' );
 
-$remote_release['tag_name'] = 'v4.0.3';
-$remote_release['assets'][0]['name'] = 'view-privacy-4.0.3.zip';
+$remote_release['tag_name'] = 'v4.0.4';
+$remote_release['assets'][0]['name'] = 'view-privacy-4.0.4.zip';
 $transients = array();
 $result = $updater->check_for_update( (object) array( 'response' => array( VIEW_PRIVACY_BASENAME => (object) array() ) ) );
 expect( isset( $result->no_update[ VIEW_PRIVACY_BASENAME ] ), 'current release must populate no_update' );
@@ -64,9 +65,33 @@ expect( ! isset( $result->response[ VIEW_PRIVACY_BASENAME ] ), 'stale response m
 $reflection = new ReflectionClass( $updater );
 $version = $reflection->getMethod( 'get_release_version' );
 $version->setAccessible( true );
-expect( '4.0.4' === $version->invoke( $updater, array( 'tag_name' => 'v4.0.4' ) ), 'lowercase v tag must parse' );
+expect( '4.0.5' === $version->invoke( $updater, array( 'tag_name' => 'v4.0.5' ) ), 'lowercase v tag must parse' );
 expect( '4.0.0' === $version->invoke( $updater, array( 'tag_name' => 'V4.0.0' ) ), 'legacy uppercase tag must remain readable' );
-expect( '' === $version->invoke( $updater, array( 'tag_name' => 'release-4.0.4' ) ), 'invalid tag must be rejected' );
+expect( '' === $version->invoke( $updater, array( 'tag_name' => 'release-4.0.5' ) ), 'invalid tag must be rejected' );
+
+$package = $reflection->getMethod( 'get_release_package' );
+$package->setAccessible( true );
+$asset_release = array(
+	'assets' => array( array( 'name' => 'view-privacy-4.0.5.zip', 'content_type' => 'application/zip', 'browser_download_url' => 'https://example.test/application-zip.zip' ) ),
+);
+expect( 'https://example.test/application-zip.zip' === $package->invoke( $updater, $asset_release, '4.0.5' ), 'application/zip must be accepted' );
+$asset_release['assets'][0]['content_type'] = 'application/x-zip-compressed';
+expect( 'https://example.test/application-zip.zip' === $package->invoke( $updater, $asset_release, '4.0.5' ), 'application/x-zip-compressed must be accepted' );
+$asset_release['assets'][0]['content_type'] = 'application/octet-stream';
+expect( '' === $package->invoke( $updater, $asset_release, '4.0.5' ), 'other MIME types must be rejected' );
+$asset_release['assets'][0]['content_type'] = 'application/zip';
+$asset_release['assets'][0]['name'] = 'other-plugin-4.0.5.zip';
+expect( '' === $package->invoke( $updater, $asset_release, '4.0.5' ), 'an unexpected asset name must be rejected' );
+
+$transients = array(
+	'view_privacy_github_release_v2' => array( 'release' => array( 'tag_name' => 'v4.0.4' ) ),
+	'view_privacy_github_release_validators_v2' => array( 'etag' => 'stale' ),
+	'update_plugins' => (object) array(),
+);
+expect( isset( $registered_actions['delete_site_transient_update_plugins'] ), 'the WordPress update-transient deletion hook must be registered' );
+$updater->clear_github_cache_after_plugin_check();
+expect( ! isset( $transients['view_privacy_github_release_v2'], $transients['view_privacy_github_release_validators_v2'] ), 'a forced plugin check must clear the GitHub release cache' );
+expect( isset( $transients['update_plugins'] ), 'the GitHub cache callback must not delete WordPress update data itself' );
 
 $hook_extra = array( 'action' => 'update', 'type' => 'plugin', 'plugin' => VIEW_PRIVACY_BASENAME );
 $site_active_plugins = array( VIEW_PRIVACY_BASENAME );
