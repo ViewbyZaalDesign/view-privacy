@@ -1,0 +1,22 @@
+name: Validate plugin
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+      - name: PHP syntax
+        run: find . -path './.git' -prune -o -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Updater tests
+        run: php tests/test-updater.php
+      - name: Build and validate release package
+        shell: pwsh
+        run: ./scripts/build-release-package.ps1 -Version 4.0.2 -OutputDirectory ./dist

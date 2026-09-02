@@ -4,7 +4,7 @@ Tags: cookies, gdpr, avg, privacy, consent, polylang
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable tag: 4.0.0
+Stable tag: 4.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,7 @@ VIEW! Privacy is ontwikkeld met als uitgangspunt de AVG/GDPR- en ePrivacy-regelg
 * Vanilla JavaScript, geen jQuery
 * Automatische blokkering van scripts, iframes en embeds totdat toestemming is gegeven
 * Ingebouwde ondersteuning voor Google Analytics 4, Google Tag Manager, Google Maps, YouTube, Meta Pixel, Hotjar en Microsoft Clarity — uitbreidbaar met eigen diensten
-* Volledig instelbare banner: positie, kleuren (inclusief knopkleuren), lettergrootte, border-radius, schaduw en animatie
+* Volledig instelbare banner: vaste positie linksonder, kleuren (inclusief knopkleuren), lettergrootte, border-radius, schaduw en animatie
 * Voorkeurencentrum met categorieën: Noodzakelijk, Voorkeuren, Statistieken, Marketing
 * Automatische herconsent bij wijziging van categorieën of banner (consentversiebeheer)
 * Optionele logging van toestemming (datum/tijd, consentversie)
@@ -57,10 +57,6 @@ Ga naar **VIEW! Privacy → Diensten** en voeg een eigen dienst toe met herkenni
 
 De consentversie wordt automatisch verhoogd en bezoekers krijgen opnieuw de banner te zien om hun toestemming te herbevestigen.
 
-= Mijn site plaatst alleen functionele cookies, moet ik dan nog om toestemming vragen? =
-
-Nee, voor strikt noodzakelijke/functionele cookies is onder de ePrivacy-richtlijn geen toestemming vereist. Schakel bij **Instellingen → Banner** de optie "Alleen functionele cookies" in: bezoekers krijgen dan een informatieve melding met één knop te zien, zonder toestemmingsvraag. Controleer voordat u dit inschakelt bij **Diensten** of er echt geen tracking-, statistiek- of marketingscripts actief zijn.
-
 = In welke talen is VIEW! Privacy beschikbaar? =
 
 Standaard Nederlands (brontaal). Sinds v3.1.3 is er ook een complete Duitse vertaling (de_DE en de_DE_formal) bijgevoegd, die automatisch wordt gebruikt zodra de WordPress-sitetaal op Duits staat (Instellingen → Algemeen → Sitetaal) — hiervoor is geen Polylang of andere meertaligheidsplugin nodig. Wilt u de vertaling zelf aanpassen of aanvullen, of andere talen toevoegen? Plaats uw eigen `view-privacy-{taalcode}.po`/`.mo`-bestanden (bijvoorbeeld bewerkt met Poedit of Loco Translate) bij voorkeur in `wp-content/languages/plugins/` in plaats van in de map van de plugin zelf: WordPress controleert die locatie automatisch als eerste, en bestanden die daar staan overleven toekomstige plugin-updates (bestanden binnen de pluginmap zelf worden bij een update overschreven).
@@ -79,8 +75,17 @@ De statuskaarten op het dashboard (Analytics, YouTube, Google Maps) tonen niet a
 
 == Changelog ==
 
+= 4.0.2 =
+* De optie voor uitsluitend functionele cookies is verwijderd; de volledige consentflow blijft altijd actief.
+* Het versienummer in banner en voorkeurencentrum wordt dynamisch uit de pluginversie opgebouwd.
+
+= 4.0.1 =
+* Betrouwbare native WordPress/GitHub-updateintegratie met expliciete release-assets, response/no_update-metadata en cacheverversing.
+* Releasepakket wordt gevalideerd op de vaste mapstructuur `view-privacy/view-privacy.php`.
+* Versterkt multisite- en consentlogging-afhandeling.
+
 = 4.0.0 =
-* Nieuwe bannerposities: links (smal) en onderaan over de volle breedte met de knoppen rechts.
+* Banner staat links onderaan; deze positie is in 4.0.0 vastgezet.
 * Knoppen hebben instelbare tekst-, achtergrond- en randkleuren voor primaire en secundaire knoppen.
 * Branding op de pluginpagina: VIEW! by Zaal Design.
 
@@ -226,7 +231,6 @@ De statuskaarten op het dashboard (Analytics, YouTube, Google Maps) tonen niet a
 * Wijziging: de optie om een eigen logo te uploaden is verwijderd uit Instellingen → Banner. De banner toont voortaan altijd het vaste VIEW!-beeldmerk.
 
 = 1.1.0 =
-* Nieuw: "Alleen functionele cookies"-modus (Instellingen → Banner). Voor sites die uitsluitend noodzakelijke/functionele cookies plaatsen: toont een eenvoudige melding met instelbare tekst en één knop (bv. "Ga verder naar de site") in plaats van de volledige toestemmingsvraag met categorieën.
 * Nieuw: dashboardkaart die toont welke bannermodus actief is.
 * Wijziging: het copyrightjaartal in de dashboardfooter wordt nu automatisch bijgewerkt op basis van de actuele datum, in plaats van hardgecodeerd te zijn.
 

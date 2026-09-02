@@ -96,6 +96,12 @@ class View_Privacy_REST {
 		}
 
 		$settings         = View_Privacy_Settings::instance()->get_settings();
+		if ( $version !== View_Privacy_Consent::instance()->get_consent_version() ) {
+			return new WP_REST_Response(
+				array( 'success' => false, 'message' => __( 'Verouderde consentversie.', 'view-privacy' ) ),
+				409
+			);
+		}
 		$valid_categories = array_keys( $settings['categories'] );
 		$categories       = array();
 
@@ -104,6 +110,9 @@ class View_Privacy_REST {
 		}
 		$categories['necessary'] = true;
 
+		// Dit endpoint is bewust publiek voor niet-ingelogde bezoekers. Een
+		// nonce beschermt de browserflow; de limiet hieronder beschermt de
+		// consentadministratie tegen herhaalde of geautomatiseerde writes.
 		View_Privacy_Logging::instance()->log_consent( $categories, $version );
 
 		return new WP_REST_Response( array( 'success' => true ), 200 );

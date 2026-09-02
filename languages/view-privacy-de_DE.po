@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: VIEW! Privacy 3.1.6\n"
+"Project-Id-Version: VIEW! Privacy 4.0.2\n"
 "Report-Msgid-Bugs-To: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,11 +40,6 @@ msgstr "Aktiv"
 #: admin/views/dashboard.php:278
 msgid "Actieve diensten"
 msgstr "Aktive Dienste"
-
-#: admin/views/settings.php:56
-#: admin/views/dashboard.php:271
-msgid "Alleen functionele cookies"
-msgstr "Nur funktionale Cookies"
 
 #: includes/class-view-privacy-consent.php:213
 #: includes/class-view-privacy-consent.php:380
@@ -189,14 +184,6 @@ msgstr "Diese Cookies werden verwendet, um Werbung für Sie relevanter zu gestal
 msgid "Deze cookies zijn essentieel voor het functioneren van de website en kunnen niet worden uitgeschakeld."
 msgstr "Diese Cookies sind für die Funktion der Website unerlässlich und können nicht deaktiviert werden."
 
-#: includes/class-view-privacy-core.php:176
-msgid "Deze site plaatst alleen functionele cookies waarvoor geen toestemming nodig is."
-msgstr "Diese Website verwendet ausschließlich funktionale Cookies, für die keine Einwilligung erforderlich ist."
-
-#: admin/views/settings.php:60
-msgid "Deze site plaatst uitsluitend noodzakelijke/functionele cookies; toon een eenvoudige melding zonder toestemmingsvraag in plaats van de volledige banner."
-msgstr "Diese Website verwendet ausschließlich notwendige/funktionale Cookies; zeigt einen einfachen Hinweis ohne Einwilligungsabfrage anstelle des vollständigen Banners."
-
 #: admin/views/services.php:31
 msgid "Dienst"
 msgstr "Dienst"
@@ -242,14 +229,6 @@ msgstr "Exportieren"
 #: includes/class-view-privacy-core.php:187
 msgid "Externe media"
 msgstr "Externe Medien"
-
-#: includes/class-view-privacy-core.php:177
-msgid "Ga verder naar de site"
-msgstr "Weiter zur Website"
-
-#: admin/views/settings.php:62
-msgid "Gebruik dit alleen als u zeker weet dat er geen statistiek-, voorkeur- of marketingcookies (zoals Google Analytics, advertentiepixels of embeds die cookies plaatsen) actief zijn. Controleer dit bij twijfel via het tabblad Diensten."
-msgstr "Verwenden Sie dies nur, wenn Sie sicher sind, dass keine Statistik-, Präferenz- oder Marketing-Cookies (wie Google Analytics, Werbe-Pixel oder Einbettungen, die Cookies setzen) aktiv sind. Prüfen Sie dies im Zweifel über den Reiter Dienste."
 
 #: admin/views/settings.php:140
 msgid "Gebruiken"
@@ -561,10 +540,6 @@ msgstr "Slogan (über dem Titel)"
 #: admin/views/settings.php:102
 msgid "Tekst"
 msgstr "Text"
-
-#: admin/views/settings.php:66
-msgid "Tekst bij \"Alleen functionele cookies\""
-msgstr "Text bei „Nur funktionale Cookies“"
 
 #: includes/class-view-privacy-consent.php:217
 #: includes/class-view-privacy-consent.php:384

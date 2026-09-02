@@ -58,6 +58,18 @@ class View_Privacy_Settings {
 		$defaults = View_Privacy_Core::default_settings();
 		$saved    = get_option( VIEW_PRIVACY_OPTION_SETTINGS, array() );
 
+		// Sinds 4.0.2 is alleen de linker, onderaan uitgelijnde bannerpositie
+		// ondersteund. Normaliseer een oude opgeslagen positie eenmalig, voordat
+		// deze via de frontendconfig als een niet-bestaande CSS-modifier belandt.
+		if ( is_array( $saved )
+			&& isset( $saved['banner'] )
+			&& is_array( $saved['banner'] )
+			&& array_key_exists( 'position', $saved['banner'] )
+			&& 'left' !== $saved['banner']['position'] ) {
+			$saved['banner']['position'] = 'left';
+			update_option( VIEW_PRIVACY_OPTION_SETTINGS, $saved );
+		}
+
 		$this->settings_cache = $this->deep_merge( $defaults, is_array( $saved ) ? $saved : array() );
 
 		return $this->settings_cache;
@@ -147,10 +159,10 @@ class View_Privacy_Settings {
 			$clean['banner']['color_bg']       = isset( $b['color_bg'] ) ? sanitize_hex_color( $b['color_bg'] ) : $current['banner']['color_bg'];
 			$clean['banner']['color_text']     = isset( $b['color_text'] ) ? sanitize_hex_color( $b['color_text'] ) : $current['banner']['color_text'];
 			$clean['banner']['color_accent']   = isset( $b['color_accent'] ) ? sanitize_hex_color( $b['color_accent'] ) : $current['banner']['color_accent'];
-			$clean['banner']['button_primary_text']   = isset( $b['button_primary_text'] ) ? sanitize_text_field( wp_unslash( $b['button_primary_text'] ) ) : $current['banner']['button_primary_text'];
+			$clean['banner']['button_primary_text']   = isset( $b['button_primary_text'] ) ? sanitize_hex_color( $b['button_primary_text'] ) : $current['banner']['button_primary_text'];
 			$clean['banner']['button_primary_bg']     = isset( $b['button_primary_bg'] ) ? sanitize_hex_color( $b['button_primary_bg'] ) : $current['banner']['button_primary_bg'];
 			$clean['banner']['button_primary_border'] = isset( $b['button_primary_border'] ) ? sanitize_hex_color( $b['button_primary_border'] ) : $current['banner']['button_primary_border'];
-			$clean['banner']['button_secondary_text']   = isset( $b['button_secondary_text'] ) ? sanitize_text_field( wp_unslash( $b['button_secondary_text'] ) ) : $current['banner']['button_secondary_text'];
+			$clean['banner']['button_secondary_text']   = isset( $b['button_secondary_text'] ) ? sanitize_hex_color( $b['button_secondary_text'] ) : $current['banner']['button_secondary_text'];
 			$clean['banner']['button_secondary_bg']     = isset( $b['button_secondary_bg'] ) ? sanitize_hex_color( $b['button_secondary_bg'] ) : $current['banner']['button_secondary_bg'];
 			$clean['banner']['button_secondary_border'] = isset( $b['button_secondary_border'] ) ? sanitize_hex_color( $b['button_secondary_border'] ) : $current['banner']['button_secondary_border'];
 			$clean['banner']['font_size']      = isset( $b['font_size'] ) ? max( 10, min( 24, (int) $b['font_size'] ) ) : $current['banner']['font_size'];

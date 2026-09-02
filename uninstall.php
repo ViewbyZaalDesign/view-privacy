@@ -21,6 +21,9 @@ function view_privacy_uninstall_site() {
 	delete_option( 'view_privacy_settings' );
 	delete_option( 'view_privacy_consent_version' );
 	delete_option( 'view_privacy_activated_version' );
+	delete_option( 'view_privacy_missing_translations' );
+	delete_option( 'view_privacy_scan_data' );
+	delete_transient( 'view_privacy_scan_lock' );
 
 	$table = $wpdb->prefix . 'view_privacy_consent_log';
 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange
@@ -28,6 +31,9 @@ function view_privacy_uninstall_site() {
 
 	wp_clear_scheduled_hook( 'view_privacy_prune_logs' );
 }
+
+delete_site_transient( 'view_privacy_github_release_v2' );
+delete_site_transient( 'update_plugins' );
 
 if ( is_multisite() ) {
 	$site_ids = get_sites( array( 'fields' => 'ids' ) );

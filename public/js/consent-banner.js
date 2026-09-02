@@ -23,7 +23,8 @@
 			date.setTime( date.getTime() + days * 24 * 60 * 60 * 1000 );
 			expires = '; expires=' + date.toUTCString();
 		}
-		document.cookie = name + '=' + encodeURIComponent( value ) + expires + '; path=/; SameSite=Lax';
+		var secure = window.location.protocol === 'https:' ? '; Secure' : '';
+		document.cookie = name + '=' + encodeURIComponent( value ) + expires + '; path=/; SameSite=Lax' + secure;
 	}
 
 	function getCookie( name ) {
@@ -195,11 +196,11 @@
 	 * zet deze veilig op een element via setAttribute (geen innerHTML/eval).
 	 */
 	function applyRawAttributes( el, raw ) {
-		var attrRegex = /([a-zA-Z0-9_-]+)\s*=\s*"([^"]*)"/g;
+		var attrRegex = /([a-zA-Z0-9_-]+)\s*=\s*(["'])(.*?)\2/g;
 		var match;
 		while ( ( match = attrRegex.exec( raw ) ) !== null ) {
 			try {
-				el.setAttribute( match[ 1 ], match[ 2 ] );
+				el.setAttribute( match[ 1 ], match[ 3 ] );
 			} catch ( e ) {
 				// Ongeldig attribuut negeren.
 			}
@@ -391,19 +392,6 @@
 		showReopenButton();
 	}
 
-	/**
-	 * Afhandeling van de eenvoudige melding (alleen functionele cookies,
-	 * geen toestemmingsvraag). Legt vast dat de melding is gezien, zonder
-	 * categoriekeuzes en zonder de herstelknop te tonen (er valt niets
-	 * aan te passen).
-	 */
-	function finalizeSimpleAck() {
-		var categories = onlyNecessary();
-		writeConsent( categories );
-		sendToServer( categories );
-		closeBanner();
-	}
-
 	function makeRetentionNote() {
 		if ( ! config.i18n.retentionNote ) {
 			return null;
@@ -415,12 +403,14 @@
 	}
 
 	function makeFooterLine() {
-		if ( ! config.footerText ) {
+		if ( ! config.footerTextTemplate || ! config.pluginVersion ) {
 			return null;
 		}
 		var p = document.createElement( 'p' );
 		p.className = 'vp-footer-line';
-		p.textContent = config.footerText;
+		p.textContent = config.footerTextTemplate
+			.replace( '%1$d', String( config.currentYear || '' ) )
+			.replace( '%2$s', String( config.pluginVersion ) );
 		return p;
 	}
 

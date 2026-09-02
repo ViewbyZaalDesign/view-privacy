@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: VIEW! Privacy 3.1.6\n"
+"Project-Id-Version: VIEW! Privacy 4.0.2\n"
 "Report-Msgid-Bugs-To: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,11 +35,6 @@ msgstr ""
 
 #: admin/views/dashboard.php:278
 msgid "Actieve diensten"
-msgstr ""
-
-#: admin/views/settings.php:56
-#: admin/views/dashboard.php:271
-msgid "Alleen functionele cookies"
 msgstr ""
 
 #: includes/class-view-privacy-consent.php:254
@@ -185,14 +180,6 @@ msgstr ""
 msgid "Deze cookies zijn essentieel voor het functioneren van de website en kunnen niet worden uitgeschakeld."
 msgstr ""
 
-#: includes/class-view-privacy-core.php:176
-msgid "Deze site plaatst alleen functionele cookies waarvoor geen toestemming nodig is."
-msgstr ""
-
-#: admin/views/settings.php:60
-msgid "Deze site plaatst uitsluitend noodzakelijke/functionele cookies; toon een eenvoudige melding zonder toestemmingsvraag in plaats van de volledige banner."
-msgstr ""
-
 #: admin/views/services.php:31
 msgid "Dienst"
 msgstr ""
@@ -237,14 +224,6 @@ msgstr ""
 
 #: includes/class-view-privacy-core.php:187
 msgid "Externe media"
-msgstr ""
-
-#: includes/class-view-privacy-core.php:177
-msgid "Ga verder naar de site"
-msgstr ""
-
-#: admin/views/settings.php:62
-msgid "Gebruik dit alleen als u zeker weet dat er geen statistiek-, voorkeur- of marketingcookies (zoals Google Analytics, advertentiepixels of embeds die cookies plaatsen) actief zijn. Controleer dit bij twijfel via het tabblad Diensten."
 msgstr ""
 
 #: admin/views/settings.php:140
@@ -556,10 +535,6 @@ msgstr ""
 
 #: admin/views/settings.php:102
 msgid "Tekst"
-msgstr ""
-
-#: admin/views/settings.php:66
-msgid "Tekst bij \"Alleen functionele cookies\""
 msgstr ""
 
 #: includes/class-view-privacy-consent.php:258

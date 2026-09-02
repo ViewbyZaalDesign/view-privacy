@@ -431,12 +431,9 @@ class View_Privacy_Consent {
 			'banner'          => $settings['banner'],
 			'categories'      => $categories,
 			'services'        => $services,
-			'footerText'      => sprintf(
-				/* translators: 1: huidig jaartal, 2: versienummer van de plugin. */
-				$this->pll_translate( __( 'Copyright %1$d View! by Zaal Design. — v%2$s', 'view-privacy' ) ),
-				(int) current_time( 'Y' ),
-				VIEW_PRIVACY_VERSION
-			),
+			'footerTextTemplate' => $this->pll_translate( __( 'Copyright %1$d View! by Zaal Design. — v%2$s', 'view-privacy' ) ),
+			'currentYear'        => (int) current_time( 'Y' ),
+			'pluginVersion'      => VIEW_PRIVACY_VERSION,
 			'i18n'            => array(
 				'acceptAll'     => $settings['banner']['button_accept_all'],
 				'rejectAll'     => $settings['banner']['button_reject_all'],

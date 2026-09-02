@@ -39,6 +39,8 @@ class View_Privacy_Core {
 	private function __construct() {
 		self::maybe_upgrade();
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_public_assets' ) );
+		add_action( 'wp_initialize_site', array( __CLASS__, 'initialize_new_site' ), 10, 2 );
+		add_action( 'wpmu_new_blog', array( __CLASS__, 'initialize_legacy_new_site' ), 10, 1 );
 	}
 
 	/**
@@ -80,6 +82,38 @@ class View_Privacy_Core {
 		update_option( 'view_privacy_activated_version', VIEW_PRIVACY_VERSION );
 	}
 
+	/** Initialise a site created after network activation. */
+	public static function initialize_new_site( $new_site, $args ) {
+		if ( ! self::is_network_active() ) {
+			return;
+		}
+		switch_to_blog( (int) $new_site->blog_id );
+		self::activate_single_site();
+		restore_current_blog();
+	}
+
+	/** Backwards-compatible hook for WordPress versions that still emit it. */
+	public static function initialize_legacy_new_site( $blog_id ) {
+		if ( ! self::is_network_active() ) {
+			return;
+		}
+		switch_to_blog( (int) $blog_id );
+		self::activate_single_site();
+		restore_current_blog();
+	}
+
+	/** @return bool */
+	private static function is_network_active() {
+		if ( ! is_multisite() ) {
+			return false;
+		}
+		if ( function_exists( 'is_plugin_active_for_network' ) ) {
+			return is_plugin_active_for_network( VIEW_PRIVACY_BASENAME );
+		}
+		$active = (array) get_site_option( 'active_sitewide_plugins', array() );
+		return isset( $active[ VIEW_PRIVACY_BASENAME ] );
+	}
+
 	/**
 	 * Eenmalige migratie bij upgrade (v3.1.2): VIEW! Privacy kreeg een eigen,
 	 * verplichte "bronpagina"-instelling voor het privacybeleid, los van
@@ -104,6 +138,22 @@ class View_Privacy_Core {
 			$wp_privacy_page_id = (int) get_option( 'wp_page_for_privacy_policy' );
 			if ( $wp_privacy_page_id ) {
 				$settings['privacy_page_id'] = $wp_privacy_page_id;
+				update_option( VIEW_PRIVACY_OPTION_SETTINGS, $settings );
+			}
+		}
+
+		// 4.0.2 removes the discontinued simple-mode UI and behaviour. Only
+		// these obsolete setting keys are removed; consent and all other
+		// settings remain untouched.
+		if ( is_array( $settings ) && isset( $settings['banner'] ) && is_array( $settings['banner'] ) ) {
+			$changed = false;
+			foreach ( array( 'simple_mode', 'simple_text', 'simple_button_label' ) as $key ) {
+				if ( array_key_exists( $key, $settings['banner'] ) ) {
+					unset( $settings['banner'][ $key ] );
+					$changed = true;
+				}
+			}
+			if ( $changed ) {
 				update_option( VIEW_PRIVACY_OPTION_SETTINGS, $settings );
 			}
 		}

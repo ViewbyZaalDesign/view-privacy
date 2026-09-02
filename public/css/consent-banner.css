@@ -191,7 +191,10 @@
 }
 
 .vp-btn--primary:hover {
-	filter: brightness(0.92);
+	background: #251a61 !important;
+	border-color: #251a61 !important;
+	color: #ffffff !important;
+	filter: none !important;
 }
 
 .vp-btn--secondary,
@@ -214,8 +217,15 @@
 }
 
 .vp-btn--secondary:hover,
+.vp-btn--text:hover {
+	background: #251a61 !important;
+	border-color: #251a61 !important;
+	color: #ffffff !important;
+	filter: none !important;
+	font-style: normal;
+}
+
 .vp-btn--secondary:active,
-.vp-btn--text:hover,
 .vp-btn--text:active {
 	background: #000000;
 	border-color: #000000;
@@ -289,6 +299,30 @@
 	color: inherit;
 	text-align: left;
 	cursor: pointer;
+}
+
+/* Houd de hoverstatus van categorierijen onafhankelijk van theme-knopstijlen.
+   De schakelaar is bewust niet opgenomen: diens eigen status blijft ongewijzigd. */
+.vp-modal .vp-category:hover {
+	background: #251a61 !important;
+	color: #ffffff !important;
+}
+
+.vp-modal .vp-category:hover .vp-category__expand {
+	background: transparent !important;
+	border-color: transparent !important;
+	color: #ffffff !important;
+}
+
+.vp-modal .vp-category:hover .vp-category__label,
+.vp-modal .vp-category:hover .vp-category__desc,
+.vp-modal .vp-category:hover .vp-category__icon,
+.vp-modal .vp-category:hover .vp-category__chevron {
+	color: #ffffff !important;
+}
+
+.vp-modal .vp-category:hover .vp-category__chevron {
+	opacity: 1 !important;
 }
 
 .vp-category__expand:focus-visible {

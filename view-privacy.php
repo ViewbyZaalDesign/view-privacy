@@ -1,14 +1,16 @@
 <?php
 /**
  * Plugin Name:       VIEW! Privacy
+ * Plugin URI:         https://github.com/ViewbyZaalDesign/view-privacy
  * Description:        Lichtgewicht, privacy-first cookieconsent-plugin voor WordPress. Ontwikkeld met als uitgangspunt de AVG/GDPR- en ePrivacy-regelgeving, zonder externe cloudservices of abonnementen.
- * Version:            4.0.0
+ * Version:            4.0.2
  * Requires at least:  6.8
  * Requires PHP:       8.1
  * Author:             VIEW! by Zaal Design
  * Author URI:         https://zaaldesign.nl
  * License:             GPL v2 or later
  * License URI:         https://www.gnu.org/licenses/gpl-2.0.html
+ * Update URI:         https://github.com/ViewbyZaalDesign/view-privacy
  * Text Domain:        view-privacy
  * Domain Path:        /languages
  * Network:            true
@@ -25,7 +27,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Constants
 // --------------------------------------------------------------------
 
-define( 'VIEW_PRIVACY_VERSION', '4.0.0' );
+define( 'VIEW_PRIVACY_VERSION', '4.0.2' );
+define( 'VIEW_PRIVACY_REQUIRES_WP', '6.8' );
+define( 'VIEW_PRIVACY_REQUIRES_PHP', '8.1' );
+define( 'VIEW_PRIVACY_TESTED_WP', '6.8' ); // Bij iedere release actualiseren na compatibiliteitstest.
+define( 'VIEW_PRIVACY_UPDATE_URI', 'https://github.com/ViewbyZaalDesign/view-privacy' );
+define( 'VIEW_PRIVACY_RELEASE_ASSET_PREFIX', 'view-privacy-' );
 define( 'VIEW_PRIVACY_CONSENT_VERSION', 1 ); // Ophogen bij wijziging van categorieën/banner om herconsent te forceren.
 define( 'VIEW_PRIVACY_FILE', __FILE__ );
 define( 'VIEW_PRIVACY_PATH', plugin_dir_path( __FILE__ ) );
