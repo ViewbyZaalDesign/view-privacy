@@ -21,6 +21,7 @@ class View_Privacy_Updater {
 	private const CACHE_TTL = 21600;
 	private const NEGATIVE_CACHE_TTL = 900;
 	private static $instance = null;
+	private $activation_mode_before_upgrade = null;
 
 	public static function instance() {
 		if ( null === self::$instance ) {
@@ -32,7 +33,60 @@ class View_Privacy_Updater {
 	private function __construct() {
 		add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_for_update' ) );
 		add_filter( 'plugins_api', array( $this, 'plugin_information' ), 20, 3 );
+		// Run before Plugin_Upgrader's priority-10 deactivation hook.
+		add_filter( 'upgrader_pre_install', array( $this, 'remember_activation_state_before_upgrade' ), 9, 2 );
+		add_filter( 'upgrader_post_install', array( $this, 'restore_activation_state_after_upgrade' ), 11, 2 );
 		add_action( 'upgrader_process_complete', array( $this, 'clear_cache_after_upgrade' ), 10, 2 );
+	}
+
+	/** Records this plugin's activation mode before WordPress deactivates it for an interactive update. */
+	public function remember_activation_state_before_upgrade( $response, $hook_extra ) {
+		if ( ! $this->is_view_privacy_upgrade( $hook_extra ) || is_wp_error( $response ) ) {
+			return $response;
+		}
+
+		$this->activation_mode_before_upgrade = null;
+		if ( is_multisite() && is_plugin_active_for_network( VIEW_PRIVACY_BASENAME ) ) {
+			$this->activation_mode_before_upgrade = 'network';
+		} elseif ( is_plugin_active( VIEW_PRIVACY_BASENAME ) ) {
+			$this->activation_mode_before_upgrade = 'site';
+		}
+
+		return $response;
+	}
+
+	/** Restores a previously active plugin only after a successful installation. */
+	public function restore_activation_state_after_upgrade( $response, $hook_extra ) {
+		if ( ! $this->is_view_privacy_upgrade( $hook_extra ) ) {
+			return $response;
+		}
+
+		$activation_mode = $this->activation_mode_before_upgrade;
+		$this->activation_mode_before_upgrade = null;
+		if ( true !== $response || ! $activation_mode ) {
+			return $response;
+		}
+
+		if ( 'network' === $activation_mode ) {
+			if ( ! is_plugin_active_for_network( VIEW_PRIVACY_BASENAME ) ) {
+				activate_plugin( VIEW_PRIVACY_BASENAME, '', true, true );
+			}
+		} elseif ( ! is_plugin_active( VIEW_PRIVACY_BASENAME ) ) {
+			activate_plugin( VIEW_PRIVACY_BASENAME, '', false, true );
+		}
+
+		return $response;
+	}
+
+	/** @param array $hook_extra @return bool */
+	private function is_view_privacy_upgrade( $hook_extra ) {
+		if ( ! is_array( $hook_extra ) || 'plugin' !== ( $hook_extra['type'] ?? '' ) || 'update' !== ( $hook_extra['action'] ?? '' ) ) {
+			return false;
+		}
+		if ( VIEW_PRIVACY_BASENAME === ( $hook_extra['plugin'] ?? '' ) ) {
+			return true;
+		}
+		return isset( $hook_extra['plugins'] ) && in_array( VIEW_PRIVACY_BASENAME, (array) $hook_extra['plugins'], true );
 	}
 
 	/** Adds a complete native update object to response or no_update. */

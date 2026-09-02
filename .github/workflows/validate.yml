@@ -19,4 +19,4 @@ jobs:
         run: php tests/test-updater.php
       - name: Build and validate release package
         shell: pwsh
-        run: ./scripts/build-release-package.ps1 -Version 4.0.2 -OutputDirectory ./dist
+        run: ./scripts/build-release-package.ps1 -Version 4.0.3 -OutputDirectory ./dist
