@@ -266,6 +266,18 @@ class View_Privacy_Scripts {
 		}
 
 		$services = View_Privacy_Settings::instance()->get_settings()['services'];
+
+		// Themify starts its frontend editor from the rendered page. Preserve Maps
+		// markup and scripts on pages the logged-in user can edit.
+		if ( isset( $services['google_maps'] )
+			&& is_user_logged_in()
+			&& is_singular()
+			&& current_user_can( 'edit_post', get_queried_object_id() )
+			&& class_exists( 'Themify_Builder_Model' )
+		) {
+			unset( $services['google_maps'] );
+		}
+
 		$enabled_services = array_filter(
 			$services,
 			function ( $s ) {
