@@ -4,7 +4,7 @@ Tags: cookies, gdpr, avg, privacy, consent, polylang
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 8.1
-Stable tag: 4.0.4
+Stable tag: 4.0.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,9 @@ Ja. VIEW! Privacy heeft een eigen, verplichte instelling voor de privacybeleidpa
 De statuskaarten op het dashboard (Analytics, YouTube, Google Maps) tonen niet alleen of een dienst is aangevinkt bij Instellingen, maar of deze daadwerkelijk op een bezochte pagina is aangetroffen en geblokkeerd. Staat een dienst pas sinds kort aan, of alleen op een pagina die nog niet bezocht is sinds het inschakelen? Dan is deze mogelijk nog niet "gezien". Bezoek de betreffende pagina eenmaal in de front-end om de status bij te werken (de plugin registreert dit met een rate-limit van maximaal één keer per 5 minuten).
 
 == Changelog ==
+
+= 4.0.5 =
+* Themify Builder: Google Maps wordt op een bewerkbare pagina uitgezonderd van blokkering voor ingelogde gebruikers met bewerkrechten voor die pagina. Voor bezoekers geldt de ingestelde toestemming.
 
 = 4.0.4 =
 * GitHub-releaseassets met de standaard MIME-type `application/x-zip-compressed` worden nu correct als releasepakket herkend.
